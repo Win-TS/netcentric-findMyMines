@@ -1,3 +1,5 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@600&display=swap'); */
+
 .App {
   text-align: center;
 }
@@ -36,3 +38,79 @@
     transform: rotate(360deg);
   }
 }
+
+/* start of main menu */
+
+/* .mainmenu-container{
+  background-color: #FFE8C8;
+  font-family: Kanit;
+}
+
+.bomg-img{
+  margin-top: 5px;
+}
+
+.sun-img{
+  margin-bottom: 10px;
+}
+
+.moon-img{
+  margin-bottom: 10px;
+}
+
+#findmymines-text{
+  font-size: 45px;
+  color: #D4492A;
+}
+
+.start-page-form{
+  text-align: center;
+  border: none;
+  font-size: 30px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+.theme-select-text{
+  font-size: 25px;
+}
+
+.theme-select-grid{
+  display: grid;
+  row-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  max-width: 500px;
+  margin: auto;
+}
+
+.day-night-btn{
+  background-color: #FFF6E9;
+  color: black;
+  font-family: Kanit;
+}
+
+.day-btn{
+  width: 50px;
+}
+
+.night-btn{
+  width: 50px;
+}
+
+#start-btn{
+  font-family: Kanit;
+  color: black;
+  font-size: 30px;
+  background-color: #b5cb99;
+  margin: 10px;
+  width: 400px;
+}
+
+#leaderboard-btn{
+  font-size: 30px;
+  background-color: #186f65;
+  width: 400px;
+  margin-bottom: 10px;
+} */
+
+/* End of Main Menu */

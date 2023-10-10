@@ -43,6 +43,8 @@ app.use((req, res, next) => {
   next();
 })
 
+app.get('/checkRoomExist', mainController.checkRoomExist);
+
 app.use('/game', gameRouter);
 app.use('/score', scoreRouter);
 

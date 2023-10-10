@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 
 const socket = io.connect('http://localhost:9000');
 
+// check online clients
 export const useOnlineClients = () => {
   const [onlineClients, setOnlineClients] = useState(0);
 
@@ -19,12 +20,13 @@ export const useOnlineClients = () => {
   return onlineClients;
 };
 
+// check room number and status
 export const usePlayerName = () => {
   const [playerName, setPlayerName] = useState("");
   const [playerNameReceived, setPlayerNameReceived] = useState("");
 
-  const sendPlayerName = (roomNo, playerName) => {
-    socket.emit("sendPlayerName", { playerName, roomNo });
+  const sendPlayerName = (roomNo, playerName, difficulty) => {
+    socket.emit("sendPlayerName", { playerName, roomNo, difficulty });
   };
 
   useEffect(() => {

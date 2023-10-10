@@ -20,7 +20,7 @@ exports.getLeaderboards = async (req, res) => {
         .sort({ score: -1 })
         .limit(15)
         .exec();
-        res.send(leaderboards);
+        res.send({leaderboards});
     } catch (err) {
         console.error(err);
         res.status(500).send('Error fetching leaderboards');

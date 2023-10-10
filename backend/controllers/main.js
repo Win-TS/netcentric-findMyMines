@@ -10,13 +10,15 @@ exports.initializeSocket = (io) => {
         socket.on("sendPlayerName", data => { // data = {playerName, roomNumber} , difficulty will be added soon
             const roomIndex = activeRooms.findIndex(x => x.roomNumber === data.roomNo)
             console.log(roomIndex);
+            console.log(data.difficulty);
             if (roomIndex === -1) {
                 console.log(`Room No. ${data.roomNo} created`);
                 socket.join(data.roomNo);
                 activeRooms.push({
                     roomNumber: data.roomNo,
                     players: [data.playerName],
-                    sId: [socket.id]
+                    sId: [socket.id],
+                    difficulty: data.difficulty
                 });
             } else {
                 const userInRoom = activeRooms[roomIndex].players;
@@ -30,7 +32,7 @@ exports.initializeSocket = (io) => {
                 }
             }
             console.log(activeRooms);
-        });
+        });       
 
         socket.on("disconnect", () => {
             const roomIndex = activeRooms.findIndex(room => room.sId.includes(socket.id));
@@ -43,7 +45,9 @@ exports.initializeSocket = (io) => {
                 if (activeRooms[roomIndex].sId.length === 0) {
                     activeRooms.splice(roomIndex, 1);
                 }
-                io.to(activeRooms[roomIndex].roomNumber).emit("roomUpdated", activeRooms[roomIndex]);
+                if (activeRooms[roomIndex]) {
+                    io.to(activeRooms[roomIndex].roomNumber).emit("roomUpdated", activeRooms[roomIndex]);
+                }
             }
             onlineClients--;
             io.emit('onlineClients', onlineClients);
@@ -53,3 +57,10 @@ exports.initializeSocket = (io) => {
 
     return io;
 };
+
+exports.checkRoomExist = (req, res) => {
+    const apiRoomCheck = activeRooms.find(room => room.roomNumber === req.query.roomNo);
+    console.log(`Room Exist: ${apiRoomCheck ? true : false}`);
+    console.log({fetchRoomExist: (apiRoomCheck ? true : false)});
+    res.send({fetchRoomExist: (apiRoomCheck ? true : false)});
+}
