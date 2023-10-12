@@ -1,4 +1,4 @@
-import { useOnlineClients } from '../hooks/socketHooks';
+import { useOnlineClients } from "../hooks/socketHooks";
 
 const OnlineClients = () => {
   const onlineClients = useOnlineClients();

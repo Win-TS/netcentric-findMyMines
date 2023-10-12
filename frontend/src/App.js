@@ -1,10 +1,10 @@
-import './App.css';
+import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import OnlineClients from './components/OnlineClients';
-import { MainMenu } from './pages/MainMenu';
-import { Game } from "./pages/Game"
-import { Leaderboard } from "./pages/Leaderboard"
-import { Avatar } from "./pages/Avatar"
+import OnlineClients from "./components/OnlineClients";
+import MainMenu from "./pages/MainMenu";
+import Game from "./pages/Game";
+import { Leaderboard } from "./pages/Leaderboard";
+import Avatar from "./pages/Avatar";
 
 function App() {
   return (

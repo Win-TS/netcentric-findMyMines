@@ -1,66 +1,174 @@
-const activeRooms = [];
+const { randRoom, randFirstPlayer } = require("../utils/utils");
+const Player = require("../utils/player");
+const Grid = require("../utils/grid");
 
-exports.initializeSocket = (io) => {
-    let onlineClients = 0;
+const activeRooms = new Map();
+const activePlayers = [];
+let peopleInRoom;
 
-    io.on('connection', socket => {
-        onlineClients++;
-        io.emit('onlineClients', onlineClients);
-        console.log(`User Connected: ${socket.id}, Online Clients: ${onlineClients}`);
-        socket.on("sendPlayerName", data => { // data = {playerName, roomNumber} , difficulty will be added soon
-            const roomIndex = activeRooms.findIndex(x => x.roomNumber === data.roomNo)
-            console.log(roomIndex);
-            console.log(data.difficulty);
-            if (roomIndex === -1) {
-                console.log(`Room No. ${data.roomNo} created`);
-                socket.join(data.roomNo);
-                activeRooms.push({
-                    roomNumber: data.roomNo,
-                    players: [data.playerName],
-                    sId: [socket.id],
-                    difficulty: data.difficulty
-                });
-            } else {
-                const userInRoom = activeRooms[roomIndex].players;
-                if (userInRoom.length >= 2) {
-                    socket.emit("roomFull", "Room is full. Cannot join.");
-                } else {
-                    socket.join(data.roomNo);
-                    activeRooms[roomIndex].players.push(data.playerName);
-                    activeRooms[roomIndex].sId.push(socket.id);
-                    socket.to(data.roomNo).emit("receivePlayerName", data);
-                }
-            }
-            console.log(activeRooms);
-        });       
-
-        socket.on("disconnect", () => {
-            const roomIndex = activeRooms.findIndex(room => room.sId.includes(socket.id));
-            if (roomIndex !== -1) {
-                const socketIndex = activeRooms[roomIndex].sId.indexOf(socket.id);
-                if (socketIndex !== -1) {
-                    activeRooms[roomIndex].sId.splice(socketIndex, 1);
-                    activeRooms[roomIndex].players.splice(socketIndex, 1);
-                }
-                if (activeRooms[roomIndex].sId.length === 0) {
-                    activeRooms.splice(roomIndex, 1);
-                }
-                if (activeRooms[roomIndex]) {
-                    io.to(activeRooms[roomIndex].roomNumber).emit("roomUpdated", activeRooms[roomIndex]);
-                }
-            }
-            onlineClients--;
-            io.emit('onlineClients', onlineClients);
-            console.log(`User Disconnected: ${socket.id}, Online Clients: ${onlineClients}`);
-        });
-    });
-
-    return io;
+const makeRoom = (difficulty) => {
+  let newRoom = randRoom();
+  while (activeRooms.has(newRoom)) {
+    newRoom = randRoom();
+  }
+  activeRooms.set(newRoom, {
+    roomId: newRoom,
+    players: [],
+    difficulty: difficulty,
+    grid: null,
+  });
+  return newRoom;
 };
 
-exports.checkRoomExist = (req, res) => {
-    const apiRoomCheck = activeRooms.find(room => room.roomNumber === req.query.roomNo);
-    console.log(`Room Exist: ${apiRoomCheck ? true : false}`);
-    console.log({fetchRoomExist: (apiRoomCheck ? true : false)});
-    res.send({fetchRoomExist: (apiRoomCheck ? true : false)});
-}
+const joinRoom = (player, room) => {
+  let currentRoom = activeRooms.get(room);
+  updatedPlayerList = currentRoom.players.push(player);
+  updatedRoom = { ...activeRooms.get(room), players: updatedPlayerList };
+};
+
+const kick = (room) => {
+  currentRoom = activeRooms.get(room);
+  currentRoom.players.pop();
+};
+
+const getRoomPlayersNum = (room) => {
+  return activeRooms.get(room).players.length;
+};
+
+const setFirstPlayer = () => {
+  const playerA = randFirstPlayer();
+  const playerB = playerA === 1 ? 1 : 0;
+  return playerA < playerB ? 0 : 1;
+};
+
+const newGame = (room, difficulty, firstPlayer) => {
+  currentRoom = activeRooms.get(room);
+  const grid = new Grid(difficulty, firstPlayer);
+  currentRoom.grid = grid;
+};
+
+exports.initializeSocket = (io) => {
+  io.on("connection", (socket) => {
+    socket.on("newGame", ({ difficulty }) => {
+      let room = makeRoom(difficulty);
+      socket.emit("newGameCreated", { room, difficulty });
+    });
+
+    socket.on("joining", ({ room }) => {
+      if (activeRooms.has(room)) {
+        socket.emit("joinConfirmed", {
+          difficulty: activeRooms.get(room).difficulty,
+        });
+      } else {
+        socket.emit("errorMessage", "No room with that id found");
+      }
+    });
+
+    socket.on("newRoomJoin", ({ room, name, difficulty }) => {
+      if (room === "" || name === "") {
+        io.to(socket.id).emit("joinError");
+      }
+      if (!activePlayers.includes(name)) {
+        socket.join(room);
+        const id = socket.id;
+        const newPlayer = new Player(name, room, id);
+        activePlayers.push(name);
+        joinRoom(newPlayer, room);
+        console.log(activeRooms);
+        peopleInRoom = getRoomPlayersNum(room);
+      }
+
+      if (peopleInRoom === 1) {
+        io.to(room).emit("waiting");
+      }
+
+      if (peopleInRoom === 2) {
+        let currentRoom = activeRooms.get(room);
+        currentPlayers = currentRoom.players;
+        let firstPlayer = setFirstPlayer();
+        for (const player of currentPlayers) {
+          io.to(player.id).emit("setFirstPlayer", {
+            firstPlayer: firstPlayer,
+            id: player.id,
+          });
+        }
+        newGame(room, currentRoom.difficulty, firstPlayer);
+        let gameState = currentRoom.grid.revealedCells;
+        let turn = currentRoom.grid.playerTurn;
+        let players = currentRoom.players.map((player) => [
+          player.id,
+          player.name,
+        ]);
+        io.to(room).emit("starting", { gameState, players, turn });
+        console.log(players);
+      }
+
+      if (peopleInRoom === 3) {
+        socket.leave(room);
+        kick(room);
+        io.to(socket.id).emit("joinError");
+      }
+    });
+
+    socket.on("move", ({ room, player, row, col }) => {
+      currentGrid = activeRooms.get(room).grid;
+      currentGrid.move(row, col, player);
+      if (currentGrid.checkWinner()) {
+        io.to(room).emit("winner", {
+          gameState: currentGrid.revealedCells,
+          player: currentGrid.playerTurn,
+        });
+      } else {
+        currentGrid.switchTurn();
+        io.to(room).emit("update", {
+          gameState: currentGrid.revealedCells,
+          turn: currentGrid.playerTurn,
+        });
+      }
+    });
+
+    socket.on("playAgainRequest", (room) => {
+      currentRoom = activeRooms.get(room);
+      currentRoom.grid.reset();
+      currentPlayers = currentRoom.players;
+      for (const player of currentPlayers) {
+        io.to(player.id).emit("setFirstPlayer", {
+          firstPlayer: currentRoom.playerTurn,
+          id: player.id,
+        });
+      }
+      io.to(room).emit("restart", {
+        gameState: currentRoom.grid.game,
+        turn: currentRoom.grid.playerTurn,
+      });
+    });
+
+    socket.on("disconnect", () => {
+      const currentRooms = Object.keys(socket.rooms);
+      if (currentRooms.length === 2) {
+        const room = currentRooms[1];
+        const currentRoom = activeRooms.get(room);
+        if (currentRoom) {
+          const playerIndex = currentRoom.players.findIndex(
+            (player) => player.id === socket.id
+          );
+          if (playerIndex !== -1) {
+            currentRoom.players.splice(playerIndex, 1);
+          }
+          if (currentRoom.players.length === 0) {
+            activeRooms.delete(room);
+          } else {
+            io.to(room).emit("roomUpdated", currentRoom);
+            io.to(room).emit("waiting");
+          }
+        }
+      }
+      const playerIndex = activePlayers.indexOf(socket.id);
+      if (playerIndex !== -1) {
+        activePlayers.splice(playerIndex, 1);
+      }
+    });
+  });
+
+  return io;
+};
