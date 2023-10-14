@@ -1,0 +1,3 @@
+const GridEasy = ({minefield, revealedCell}) => {
+    
+}

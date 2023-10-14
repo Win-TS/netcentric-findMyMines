@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* start of main menu */
+
+/* .mainmenu-container{
+  background-color: #FFE8C8;
+  font-family: Kanit;
+}
+
+.bomg-img{
+  margin-top: 5px;
+}
+
+.sun-img{
+  margin-bottom: 10px;
+}
+
+.moon-img{
+  margin-bottom: 10px;
+}
+
+#findmymines-text{
+  font-size: 45px;
+  color: #D4492A;
+}
+
+.start-page-form{
+  text-align: center;
+  border: none;
+  font-size: 30px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+
+.theme-select-text{
+  font-size: 25px;
+}
+
+.theme-select-grid{
+  display: grid;
+  row-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  max-width: 500px;
+  margin: auto;
+}
+
+.day-night-btn{
+  background-color: #FFF6E9;
+  color: black;
+  font-family: Kanit;
+}
+
+.day-btn{
+  width: 50px;
+}
+
+.night-btn{
+  width: 50px;
+}
+
+#start-btn{
+  font-family: Kanit;
+  color: black;
+  font-size: 30px;
+  background-color: #b5cb99;
+  margin: 10px;
+  width: 400px;
+}
+
+#leaderboard-btn{
+  font-size: 30px;
+  background-color: #186f65;
+  width: 400px;
+  margin-bottom: 10px;
+} */
+
+/* End of Main Menu */
+
+/* Start of Leaderboard */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 120px;
+}
+
+/* BackComponent.css */
+.back {
+  background-color: #617a55; /* Sets the background color to green */
+  position: relative; /* This is fine if the element is part of a larger layout */
+  display: flex; /* Enable flex properties for centering */
+  align-items: center; /* Centers content vertically within the element */
+  justify-content: center; /* Centers content horizontally within the element */
+  height: 700px; /* Set a minimum height of the viewport height */
+  width: 600px; /* Set a minimum width of the viewport width */
+  border-radius: 10%; /* Adds rounded corners with a 10% border radius */
+}
+
+.front {
+  position: absolute;
+  background-color: #a4d0a4;
+  width: 600px;
+  height: 700px;
+  left: 50px;
+  bottom: 50px;
+  border-radius: 10%;
+  padding-bottom: 100px;
+}
+
+.top {
+  position: absolute;
+  background-color: #d9d9d9;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  height: 100px;
+  left: 100px;
+  bottom: 625px;
+  border-radius: 20px;
+}
+
+.text {
+  font-size: 45px;
+  text-align: center; /* Horizontally centers the text within the h1 element */
+  line-height: 2; /* Vertically centers the text within the h1 element */
+  font-family: "Kanit", sans-serif;
+  font-weight: 800;
+}
+
+.grid {
+  max-height: 400px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enable vertical scrolling when content overflows */
+  border: 1px solid #ccc; /* Optional: Add a border to visualize the container */
+  border-radius: 5px; /* Optional: Add rounded corners */
+  padding: 5px; /* Optional: Add padding for spacing */
+  background-color: #d0e7d2;
+  margin-top: 5px;
+}
+
+.trophies {
+  display: block;
+}
+.arrow {
+  display: block;
+}
+
+.player-box {
+  border: 2px solid beige;
+  margin: 5px;
+}
+
+.player {
+  color: #7d5d1e;
+  background-color: #d0e7d2;
+  height: 100%;
+  font-family: "Kanit", sans-serif;
+}
+
+.score {
+  background-color: white;
+  font-family: "Kanit", sans-serif;
+}
+
+.top-ranking {
+  display: flex;
+}
+
+/* End of Leaderboard */
