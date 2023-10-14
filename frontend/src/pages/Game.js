@@ -33,7 +33,7 @@ class Game extends React.Component {
 
   componentDidMount() {
     this.socket = io(ENDPOINT);
-    const { room, name, difficulty, playerIndex, avatar } = qs.parse(
+    let { room, name, difficulty, playerIndex, avatar } = qs.parse(
       window.location.search,
       {
         ignoreQueryPrefix: true,
@@ -41,6 +41,7 @@ class Game extends React.Component {
     );
     this.setState({ room });
     this.setState({ playerIndex });
+    if (avatar === "undefined") avatar = 'avatar1'
     this.setState({ avatar });
     console.log(avatar);
     this.socket.emit("newRoomJoin", { room, name, difficulty, avatar, playerIndex });
