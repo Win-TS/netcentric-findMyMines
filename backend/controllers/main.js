@@ -4,6 +4,7 @@ const Grid = require("../utils/grid");
 
 const activeRooms = new Map();
 const activePlayers = [];
+const roomArray = [];
 let peopleInRoom;
 
 const makeRoom = (difficulty) => {
@@ -35,12 +36,6 @@ const getRoomPlayersNum = (room) => {
   return activeRooms.get(room).players.length;
 };
 
-const setFirstPlayer = () => {
-  const playerA = randFirstPlayer();
-  const playerB = playerA === 1 ? 1 : 0;
-  return playerA < playerB ? 0 : 1;
-};
-
 const newGame = (room, difficulty, firstPlayer) => {
   currentRoom = activeRooms.get(room);
   const grid = new Grid(difficulty, firstPlayer);
@@ -64,50 +59,76 @@ exports.initializeSocket = (io) => {
       }
     });
 
-    socket.on("newRoomJoin", ({ room, name, difficulty, avatar, playerIndex }) => {
-      if (room === "" || name === "") {
-        io.to(socket.id).emit("joinError");
-      }
-      if (!activePlayers.includes(name)) {
-        socket.join(room);
-        const id = socket.id;
-        const newPlayer = new Player(name, room, id, undefined, avatar);
-        activePlayers.push(name);
-        joinRoom(newPlayer, room);
-        peopleInRoom = getRoomPlayersNum(room);
-      }
-
-      if (peopleInRoom === 1) {
-        io.to(room).emit("waiting");
-      }
-
-      if (peopleInRoom === 2) {
-        let currentRoom = activeRooms.get(room);
-        currentPlayers = currentRoom.players;
-        let firstPlayer = setFirstPlayer();
-        for (const player of currentPlayers) {
-          io.to(player.id).emit("setFirstPlayer", {
-            firstPlayer: firstPlayer,
-            id: player.id,
-          });
+    socket.on(
+      "newRoomJoin",
+      ({ room, name, difficulty, avatar, playerIndex }) => {
+        if (room === "" || name === "") {
+          io.to(socket.id).emit("joinError");
         }
-        newGame(room, currentRoom.difficulty, firstPlayer);
-        let gameState = currentRoom.grid.revealedCells;
-        let turn = currentRoom.grid.playerTurn;
-        let players = currentRoom.players.map((player) => [
-          player.id,
-          player.name,
-        ]);
-        let avatars = [currentRoom.players[0].avatar, currentRoom.players[1].avatar];
-        console.log(avatars);
-        io.to(room).emit("starting", { gameState, players, turn, avatars });
-      }
+        if (!activePlayers.includes(name)) {
+          socket.join(room);
+          const id = socket.id;
+          const newPlayer = new Player(name, room, id, avatar);
+          activePlayers.push(name);
+          joinRoom(newPlayer, room);
+          peopleInRoom = getRoomPlayersNum(room);
+        }
 
-      if (peopleInRoom === 3) {
-        socket.leave(room);
-        kick(room);
-        io.to(socket.id).emit("joinError");
+        if (peopleInRoom === 1) {
+          io.to(room).emit("waiting");
+        }
+
+        if (peopleInRoom === 2) {
+            let currentRoom = activeRooms.get(room);
+            currentPlayers = currentRoom.players;
+            
+          if (!roomArray.includes(room)) {
+            roomArray.push(room);
+            let firstPlayer = randFirstPlayer();
+            io.to(room).emit("setFirstPlayer", {
+              firstPlayer: firstPlayer,
+            });
+            newGame(room, currentRoom.difficulty, firstPlayer)
+          }
+
+          let minefield = currentRoom.grid.minefield;
+          let gameState = currentRoom.grid.revealedCells;
+          let turnInd = currentRoom.grid.playerTurn;
+          let players = currentRoom.players.map((player) => [
+            player.id,
+            player.name,
+          ]);
+          let avatars = [
+            currentRoom.players[0].avatar,
+            currentRoom.players[1].avatar,
+          ];
+          console.log(turnInd);
+          io.to(room).emit("starting", {
+            minefield,
+            gameState,
+            players,
+            turnInd,
+            avatars,
+          });
+
+        }
+
+        if (peopleInRoom === 3) {
+          socket.leave(room);
+          kick(room);
+          io.to(socket.id).emit("joinError");
+        }
+
       }
+    );
+
+    socket.on("test", ({room}) => {
+      currentGrid = activeRooms.get(room).grid;
+      currentGrid.switchTurn();
+      io.to(room).emit("update", {
+        gameState: currentGrid.revealedCells,
+        turnInd: currentGrid.playerTurn,
+      });
     });
 
     socket.on("move", ({ room, player, row, col }) => {

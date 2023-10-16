@@ -129,7 +129,7 @@ class MainMenu extends Component {
     if (this.state.serverConfirmed) {
       return (
         <Navigate
-          to={`/game?room=${this.state.room}&name=${this.state.name}&difficulty=${this.state.difficulty}&playerIndex=${this.state.playerIndex}&avatar=${this.state.selectedAvatar}`}
+          to={`/game?room=${this.state.room}&name=${this.state.name}&difficulty=${this.state.difficulty}&playerInd=${this.state.playerIndex}&avatar=${this.state.selectedAvatar}`}
         />
       );
     } else {

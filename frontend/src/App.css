@@ -206,3 +206,28 @@
 }
 
 /* End of Leaderboard */
+
+/* Start of Game & Board  */
+#easy-board {
+  width: 320px;
+  height: 320px;
+  border: 10px solid darkgray;
+  background-color: lightgray;
+
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#easy-board div {
+  width: 50px;
+  height: 50px;
+  border: 1px solid whitesmoke;
+  
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* End of Game & Board  */
