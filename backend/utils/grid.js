@@ -70,10 +70,11 @@ class Grid {
       this.playerTurn = 1;
     }
     this.score = [0, 0];
+    this.revealedBombs = 0;
   };
 
   checkEnd = () => {
-    return this.revealedBombs === this.numMines;
+    return this.revealedBombs === Math.ceil(this.numMines/2);
   };
 }
 
