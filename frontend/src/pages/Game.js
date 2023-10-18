@@ -171,6 +171,8 @@ import Status from "../components/Status";
 import GridBlock from "../components/GridBlock";
 import Scoreboard from "../components/Scoreboard";
 import ResultModal from "../components/ResultModal";
+import ShowAvatar from "../components/ShowAvatar";
+import avatar1 from "../assets/avatar1.png";
 
 const ENDPOINT = "http://localhost:9000/";
 const socket = io.connect(ENDPOINT);
@@ -306,7 +308,7 @@ const Game = () => {
       socket.off("starting");
       socket.off("joinError");
     };
-  }, [socket, opponentAvatar, minefield, waiting, playerIndex]);
+  }, [socket, selectedAvatar, opponentAvatar, minefield, waiting, playerIndex]);
 
   useEffect(() => {
     socket.on("update", ({ gameState, turnInd, scoreArray }) =>
@@ -343,6 +345,8 @@ const Game = () => {
           opponent={opponentPlayer[0]}
           opponentScore={opponentPlayer[1]}
         />
+        <ShowAvatar avatar={selectedAvatar}/>
+        <ShowAvatar avatar={opponentAvatar}/>
         <ResultModal
           score={currentPlayerScore}
           opponentScore={opponentPlayer[1]}

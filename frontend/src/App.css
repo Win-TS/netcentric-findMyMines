@@ -233,19 +233,88 @@
 /* End of Game & Board  */
 
 .grid-div-6 {
-  display: grid;
+  display: grid; /* Use CSS Grid */
   grid-template-rows: repeat(6, 1fr);
   grid-template-columns: repeat(6, 1fr);
-  gap: 5px;
+  width: 470px;
+  height: 470px;
+  align-items: center;
+  margin: auto;
+  border: 10px solid darkgrey;
+
 }
 
-.block {
-  width: 100px;
-  height: 100px;
-  border: 1px solid #000;
+.block-6 {
+  width: 75px;
+  height: 75px;
+  border: 1px solid grey;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 18px;
   font-weight: bold;
+  background-color: lightgray; /* Add a background color for each block */
 }
+
+.grid-div-9 {
+  display: grid; /* Use CSS Grid */
+  grid-template-rows: repeat(9, 1fr);
+  grid-template-columns: repeat(9, 1fr);
+  width: 605px;
+  height: 605px;
+  align-items: center;
+  margin: auto;
+  border: 10px solid darkgrey;
+}
+
+.block-9{
+  width: 65px;
+  height: 65px;
+  border: 1px solid grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: lightgray; /* Add a background color for each block */
+}
+
+.grid-div-12 {
+  display: grid; /* Use CSS Grid */
+  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+  width: 680px;
+  height: 680px;
+  align-items: center;
+  margin: auto;
+  border: 10px solid darkgrey;
+}
+.block-12 {
+  width: 55px;
+  height: 55px;
+  border: 1px solid grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: lightgray; /* Add a background color for each block */
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scoreboard-player {
+  margin-left: 100px;
+  order: 1; /* Place player on the right */
+}
+
+.scoreboard-opponent {
+  margin-right: 100px;
+  order: 2; /* Place opponent on the left */
+}
+
+
