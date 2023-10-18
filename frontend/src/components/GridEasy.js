@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const GridEasy = ({ minefield, handleClick }) => {
+const GridEasy = ({ minefield, revealedCell, handleClick, turn }) => {
 
   const size = 6;
   const handleCellClick = (row, col) => {

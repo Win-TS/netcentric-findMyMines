@@ -102,7 +102,6 @@ exports.initializeSocket = (io) => {
             currentRoom.players[0].avatar,
             currentRoom.players[1].avatar,
           ];
-          console.log(turnInd);
           io.to(room).emit("starting", {
             minefield,
             gameState,
@@ -122,29 +121,24 @@ exports.initializeSocket = (io) => {
       }
     );
 
-    socket.on("test", ({room}) => {
+    socket.on("move", ({ room, playerIndex, row, col }) => {
+      console.log(row, col, playerIndex);
       currentGrid = activeRooms.get(room).grid;
-      currentGrid.switchTurn();
-      io.to(room).emit("update", {
-        gameState: currentGrid.revealedCells,
-        turnInd: currentGrid.playerTurn,
-      });
-    });
-
-    socket.on("move", ({ room, player, row, col }) => {
-      currentGrid = activeRooms.get(room).grid;
-      currentGrid.move(row, col, player);
-      if (currentGrid.checkWinner()) {
+      currentGrid.move(row, col, playerIndex);
+      if (currentGrid.checkEnd()) {
         io.to(room).emit("winner", {
           gameState: currentGrid.revealedCells,
-          player: currentGrid.playerTurn,
+          turnInd: currentGrid.playerTurn,
+          scoreArray: currentGrid.score
         });
       } else {
         currentGrid.switchTurn();
         io.to(room).emit("update", {
           gameState: currentGrid.revealedCells,
-          turn: currentGrid.playerTurn,
+          turnInd: currentGrid.playerTurn,
+          scoreArray: currentGrid.score
         });
+        console.log(currentGrid.score);
       }
     });
 

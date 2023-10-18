@@ -23,15 +23,14 @@ class Grid {
     this.end = false;
   }
 
-  generateMinefield = (seed) => {
-    const rng = seedrandom(seed); // Use a consistent seed for randomness
+  generateMinefield = () => {
     const randomGrid = Array(this.size)
       .fill()
       .map(() => Array(this.size).fill(0));
     let i = 0;
     const positions = [];
     while (i < this.numMines) {
-      let random = Math.floor(rng() * (this.size * this.size - 1));
+      let random = Math.floor(Math.random() * (this.size * this.size - 1));
       if (!positions.includes(random)) {
         positions.push(random);
         randomGrid[Math.floor(random / this.size)][random % this.size] = 1;
@@ -42,11 +41,12 @@ class Grid {
   };
 
   move = (row, col, player) => {
-    if (!this.minefield[row][col] && !this.end) {
+    if (!this.revealedCells[row][col] && !this.end) {
       this.revealedCells[row][col] = true;
       if (this.minefield[row][col]) {
         this.score[player]++;
         this.revealedBombs++;
+        console.log(player, this.score);
       }
     }
   };

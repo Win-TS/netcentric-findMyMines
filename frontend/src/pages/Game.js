@@ -164,19 +164,25 @@ import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import io from "socket.io-client";
 import qs from "qs";
+//import '../App.css'
 
 import Wait from "../components/Wait";
 import Status from "../components/Status";
-import GridEasy from "../components/GridEasy";
+import GridBlock from "../components/GridBlock";
+import Scoreboard from "../components/Scoreboard";
+import ResultModal from "../components/ResultModal";
 
 const ENDPOINT = "http://localhost:9000/";
 const socket = io.connect(ENDPOINT);
 
 const Game = () => {
+  const [playerName, setPlayerName] = useState("");
   const [minefield, setMinefield] = useState(null);
+  const [size, setSize] = useState(0);
+  const [numMines, setNumMines] = useState(0);
   const [game, setGame] = useState(null);
-  const [playerIndex, setPlayerIndex] = useState(null);
-  const [firstPlayer, setFirstPlayer] = useState(null);
+  const [playerIndex, setPlayerIndex] = useState(-1);
+  const [firstPlayer, setFirstPlayer] = useState(-1);
   const [turn, setTurn] = useState(true);
   const [end, setEnd] = useState(false);
   const [room, setRoom] = useState("");
@@ -189,21 +195,49 @@ const Game = () => {
   const [waiting, setWaiting] = useState(false);
   const [joinError, setJoinError] = useState(false);
 
-  const handleClick = () => {
-    // if (!game[row][col] && !end && turn) {
-    // }
-    socket.emit("test", { room });
+  const handleClick = (row, col) => {
+    if (!game[row][col] && !end && turn) {
+      socket.emit("move", { room, playerIndex, row, col });
+    }
   };
 
-  const handleUpdate = (gameState, turn) => {
+  const handleUpdate = (gameState, turnInd, scoreArray) => {
     setGame(gameState);
-    setTurn(playerIndex === turn);
-    //setMessage();
+    setTurn(playerIndex === turnInd);
+    setStatusMessage(
+      playerIndex === turnInd ? "Your Turn" : `${opponentPlayer[0]}'s Turn`
+    );
+    setCurrentPlayerScore(scoreArray[playerIndex]);
+    let currentOpponentPlayer = [...opponentPlayer];
+    currentOpponentPlayer[1] = scoreArray[playerIndex === 0 ? 1 : 0];
+    setOpponentPlayer(currentOpponentPlayer);
   };
 
-  const renderGrid = () => {
+  const handleWin = (gameState, scoreArray) => {
+    setGame(gameState);
+    setCurrentPlayerScore(scoreArray[playerIndex]);
+    let currentOpponentPlayer = [...opponentPlayer];
+    currentOpponentPlayer[1] = scoreArray[playerIndex === 0 ? 1 : 0];
+    setOpponentPlayer(currentOpponentPlayer);
+    setEnd(true);
+  };
+
+  const renderGrid = (row, col) => {
     if (minefield) {
-      return <GridEasy minefield={minefield} handleClick={handleClick} />;
+      let index = row * size + col;
+      return (
+        <GridBlock
+          key={index}
+          id={index}
+          player={playerIndex}
+          mine={minefield[row][col]}
+          revealed={game[row][col]}
+          size={size}
+          end={end}
+          turn={turn}
+          onClick={handleClick}
+        />
+      );
     }
     return <div></div>;
   };
@@ -216,11 +250,21 @@ const Game = () => {
       }
     );
     playerInd = Number(playerInd);
-    //console.log(room, name, difficulty, playerInd, avatar);
     if (avatar === "undefined") avatar = "avatar1";
+    setPlayerName(name);
     setRoom(room);
     setPlayerIndex(playerInd);
     setSelectedAvatar(avatar);
+    if (difficulty === "easy") {
+      setSize(6);
+      setNumMines(11);
+    } else if (difficulty === "medium") {
+      setSize(9);
+      setNumMines(25);
+    } else if (difficulty === "hard") {
+      setSize(12);
+      setNumMines(43);
+    }
     socket.emit("newRoomJoin", {
       room,
       name,
@@ -262,39 +306,51 @@ const Game = () => {
       socket.off("starting");
       socket.off("joinError");
     };
-  }, [socket, opponentAvatar, minefield, waiting]);
+  }, [socket, opponentAvatar, minefield, waiting, playerIndex]);
 
   useEffect(() => {
-    socket.on("update", ({ gameState, turnInd }) => {
-      //this.handleUpdate(gameState, turn)
-      //this.handleClick()
-      setStatusMessage(
-        playerIndex === turnInd ? "Your Turn" : `${opponentPlayer[0]}'s Turn`
-      );
-    });
-
-    socket.on("winner", ({ gameState, turn }) =>
-      this.handleWin(gameState, turn)
+    socket.on("update", ({ gameState, turnInd, scoreArray }) =>
+      handleUpdate(gameState, turnInd, scoreArray)
     );
-
-    socket.on("restart", ({ gameState, turn }) =>
-      this.handleRestart(gameState, turn)
+    socket.on("winner", ({ gameState, scoreArray }) =>
+      handleWin(gameState, scoreArray)
+    );
+    socket.on("restart", ({ gameState, turnInd }) =>
+      this.handleRestart(gameState, turnInd)
     );
     return () => {
       socket.off("update");
       socket.off("winner");
       socket.off("restart");
     };
-  }, [statusMessage, end]);
+  }, [statusMessage, end, game, currentPlayerScore, opponentPlayer]);
 
-  return (
-    <>
-      <Wait display={waiting} room={room} />
-      <Status message={statusMessage} />
-      <button onClick={handleClick}>Swap</button>
-      <div>{renderGrid()}</div>
-    </>
-  );
+  if (joinError) {
+    return <Navigate to={"/"} />;
+  } else {
+    const gridArray = [];
+    for (let i = 0; i < size * size; i++) {
+      const newGridBlock = renderGrid(Math.floor(i / size), i % size);
+      gridArray.push(newGridBlock);
+    }
+    return (
+      <>
+        <Wait display={waiting} room={room} />
+        <Status message={statusMessage} />
+        <Scoreboard
+          player={playerName}
+          playerScore={currentPlayerScore}
+          opponent={opponentPlayer[0]}
+          opponentScore={opponentPlayer[1]}
+        />
+        <ResultModal
+          score={currentPlayerScore}
+          opponentScore={opponentPlayer[1]}
+          end={end}
+        />
+        <div className={`grid-div-${size}`}>{gridArray}</div>
+      </>
+    );
+  }
 };
-
 export default Game;
