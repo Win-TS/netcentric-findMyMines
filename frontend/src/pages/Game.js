@@ -221,6 +221,22 @@ const Game = () => {
     setOpponentPlayer(currentOpponentPlayer);
     setEnd(true);
   };
+  const handleRestartButton = () => {
+    socket.emit("playAgainRequest", room)
+  }
+  const handleRestart = (gameState, turnInd, minefield) => {
+    console.log(gameState)
+    setGame(gameState);
+    setEnd(false)
+    setStatusMessage(
+      playerIndex === turnInd ? "Your Turn" : `${opponentPlayer[0]}'s Turn`
+    )
+    setCurrentPlayerScore(0);
+    let currentOpponentPlayer = [...opponentPlayer];
+    currentOpponentPlayer[1] = 0;
+    setOpponentPlayer(currentOpponentPlayer);
+    setMinefield(minefield);
+  }
 
   const renderGrid = (row, col) => {
     if (minefield) {
@@ -315,8 +331,8 @@ const Game = () => {
     socket.on("winner", ({ gameState, scoreArray }) =>
       handleWin(gameState, scoreArray)
     );
-    socket.on("restart", ({ gameState, turnInd }) =>
-      this.handleRestart(gameState, turnInd)
+    socket.on("restart", ({ gameState, turnInd, minefield }) =>
+      handleRestart(gameState, turnInd, minefield)
     );
     return () => {
       socket.off("update");
@@ -343,6 +359,7 @@ const Game = () => {
           opponent={opponentPlayer[0]}
           opponentScore={opponentPlayer[1]}
         />
+        <button onClick={handleRestartButton}>Restart</button>
         <ResultModal
           score={currentPlayerScore}
           opponentScore={opponentPlayer[1]}

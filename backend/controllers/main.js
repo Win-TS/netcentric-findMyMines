@@ -145,16 +145,13 @@ exports.initializeSocket = (io) => {
     socket.on("playAgainRequest", (room) => {
       currentRoom = activeRooms.get(room);
       currentRoom.grid.reset();
-      currentPlayers = currentRoom.players;
-      for (const player of currentPlayers) {
-        io.to(player.id).emit("setFirstPlayer", {
-          firstPlayer: currentRoom.playerTurn,
-          id: player.id,
-        });
-      }
+      console.log(currentRoom)
+
+
       io.to(room).emit("restart", {
-        gameState: currentRoom.grid.game,
-        turn: currentRoom.grid.playerTurn,
+        gameState: currentRoom.grid.revealedCells,
+        turnInd: currentRoom.grid.playerTurn,
+        minefield: currentRoom.grid.minefield,
       });
     });
 
