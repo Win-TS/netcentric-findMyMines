@@ -1,5 +1,3 @@
-const seedrandom = require('seedrandom');
-
 class Grid {
   constructor(difficulty, playerTurn) {
     this.difficulty = difficulty;
@@ -74,7 +72,7 @@ class Grid {
   };
 
   checkEnd = () => {
-    return this.revealedBombs === Math.ceil(this.numMines/2);
+    return this.score.some(playerScore => (playerScore === Math.ceil(this.numMines/2)));
   };
 }
 

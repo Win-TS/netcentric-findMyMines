@@ -1,170 +1,7 @@
-// import React from "react";
-
-// import Wait from "../components/Wait";
-// import Status from "../components/Status";
-// import GridEasy from "../components/GridEasy";
-
-// import io from "socket.io-client";
-// import qs from "qs";
-// import { Navigate } from "react-router-dom";
-
-// const ENDPOINT = "http://localhost:9000/";
-//const socket = io(ENDPOINT);
-
-// class Game extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       minefield: null,
-//       grid: null,
-//       playerIndex: null,
-//       firstPlayer: null,
-//       turn: true,
-//       end: false,
-//       room: "",
-//       statusMessage: "",
-//       currentPlayerScore: 0,
-//       opponentPlayer: [],
-//       selectedAvatar: null,
-//       opponentAvatar: null,
-//       streakBombs: 0,
-//       waiting: false,
-//       joinError: false,
-//     };
-//   }
-
-//   componentDidMount() {
-//     this.socket = io(ENDPOINT);
-//     let { room, name, difficulty, playerIndex, avatar } = qs.parse(
-//       window.location.search,
-//       {
-//         ignoreQueryPrefix: true,
-//       }
-//     );
-//     this.setState({ room });
-//     this.setState({ playerIndex });
-//     if (avatar === "undefined") avatar = "avatar1";
-//     this.setState({ selectedAvatar: avatar });
-//     this.socket.emit("newRoomJoin", {
-//       room,
-//       name,
-//       difficulty,
-//       avatar,
-//       playerIndex,
-//     });
-//     this.socket.on("waiting", () =>
-//       this.setState({
-//         waiting: true,
-//         currentPlayerScore: 0,
-//         opponentPlayer: [],
-//       })
-//     );
-//     //gameState:revealedCells array, players:[[id1, name1], [id2, name2]], turn,
-//     this.socket.on("starting", ({ minefield, gameState, players, turn, avatars }) => {
-//       this.setState({
-//         minefield: minefield,
-//         waiting: false,
-//         opponentAvatar: avatars[playerIndex === 0 ? 1 : 0],
-//       });
-//       this.gameStart(gameState, players, turn);
-//       console.log(gameState, players, turn, this.state.selectedAvatar ,this.state.opponentAvatar);
-//       console.log(minefield);
-//     });
-//     this.socket.on("joinError", () => this.setState({ joinError: true }));
-//     this.socket.on("setFirstPlayer", ({ firstPlayer }) => {
-//       this.setState({ firstPlayer: firstPlayer });
-//     });
-//     this.socket.on("update", ({ gameState, turn }) =>
-//       this.handleUpdate(gameState, turn)
-//     );
-//     this.socket.on("winner", ({ gameState, turn }) =>
-//       this.handleWin(gameState, turn)
-//     );
-//     this.socket.on("restart", ({ gameState, turn }) =>
-//       this.handleRestart(gameState, turn)
-//     );
-//   }
-
-//   setTurn = (turn) => {
-//     this.setState({ turn: this.state.playerIndex === turn });
-//   };
-
-//   setGame = (gameState) => {
-//     this.setState({ game: gameState });
-//   };
-
-//   setMessage() {
-//     const message = this.state.turn
-//       ? "Your Turn"
-//       : `${this.state.opponentPlayer[0]}'s Turn`;
-//     this.setState({ statusMessage: message });
-//   }
-
-//   gameStart = (gameState, players, turn) => {
-//     const opponent = players[this.state.playerIndex === 0 ? 1 : 0][1];
-//     this.setState({ opponentPlayer: [opponent, 0], end: false });
-//     this.setGame(gameState);
-//     this.setTurn(turn);
-//     this.setMessage();
-//   };
-
-//   handleClick = (row, col) => {
-//     const { grid, end, turn, room, playerIndex } = this.state;
-//     if (!grid[row][col] && !end && turn) {
-//       this.socket.emit("move", { room, playerIndex, row, col });
-//     }
-//   };
-
-//   cellClicked = (row, col) => {
-//     if (this.state.turn && !this.state.end) {
-//       this.socket.emit("move", {
-//         room: this.state.room,
-//         player: this.state.playerIndex,
-//         row,
-//         col,
-//       });
-//     }
-//   };
-
-//   handleUpdate = (gameState, turn) => {
-//     this.setGame(gameState);
-//     this.setTurn(turn);
-//     this.setMessage();
-//   };
-
-//   renderGrid = () => {
-//     if (this.state.minefield) {
-//       return(
-//         <GridEasy minefield={this.state.minefield} handleClick={this.handleClick}/>
-//       );
-//     }
-//     return <div></div>;
-//   }
-
-//   render = () => {
-//     if (this.state.joinError) {
-//       return <Navigate to={`/`} />;
-//     } else {
-//       return (
-//         <>
-//           <Wait display={this.state.waiting} room={this.state.room} />
-//           <Status message={this.state.statusMessage} />
-//           <div>
-//             {this.renderGrid()}
-//           </div>
-//         </>
-//       );
-//       // }
-//     }
-//   }
-// }
-// export default Game;
-
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import io from "socket.io-client";
 import qs from "qs";
-//import '../App.css'
 
 import Wait from "../components/Wait";
 import Status from "../components/Status";
@@ -172,7 +9,8 @@ import GridBlock from "../components/GridBlock";
 import Scoreboard from "../components/Scoreboard";
 import ResultModal from "../components/ResultModal";
 import ShowAvatar from "../components/ShowAvatar";
-import avatar1 from "../assets/avatar1.png";
+import StartModal from "../components/StartModal";
+import CountdownTimer from "../components/CountdownTimer";
 
 const ENDPOINT = "http://localhost:9000/";
 const socket = io.connect(ENDPOINT);
@@ -181,11 +19,12 @@ const Game = () => {
   const [playerName, setPlayerName] = useState("");
   const [minefield, setMinefield] = useState(null);
   const [size, setSize] = useState(0);
-  const [numMines, setNumMines] = useState(0);
   const [game, setGame] = useState(null);
   const [playerIndex, setPlayerIndex] = useState(-1);
   const [firstPlayer, setFirstPlayer] = useState(-1);
   const [turn, setTurn] = useState(true);
+  const [start, setStart] = useState(false);
+  const [timer, setTimer] = useState(false);
   const [end, setEnd] = useState(false);
   const [room, setRoom] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
@@ -203,6 +42,13 @@ const Game = () => {
     }
   };
 
+  const handleTimeout = () => {
+    setTimer(false);
+    if (!end && turn) {
+      socket.emit("move", { room });
+    }
+  }
+
   const handleUpdate = (gameState, turnInd, scoreArray) => {
     setGame(gameState);
     setTurn(playerIndex === turnInd);
@@ -213,6 +59,7 @@ const Game = () => {
     let currentOpponentPlayer = [...opponentPlayer];
     currentOpponentPlayer[1] = scoreArray[playerIndex === 0 ? 1 : 0];
     setOpponentPlayer(currentOpponentPlayer);
+    setTimer(true);
   };
 
   const handleWin = (gameState, scoreArray) => {
@@ -268,20 +115,17 @@ const Game = () => {
       }
     );
     playerInd = Number(playerInd);
-    if (avatar === "undefined") avatar = "avatar1";
+    if (avatar === "undefined" || avatar === "null") avatar = "avatar1";
     setPlayerName(name);
     setRoom(room);
     setPlayerIndex(playerInd);
     setSelectedAvatar(avatar);
     if (difficulty === "easy") {
       setSize(6);
-      setNumMines(11);
     } else if (difficulty === "medium") {
       setSize(9);
-      setNumMines(25);
     } else if (difficulty === "hard") {
       setSize(12);
-      setNumMines(43);
     }
     socket.emit("newRoomJoin", {
       room,
@@ -293,6 +137,7 @@ const Game = () => {
   }, []);
 
   useEffect(() => {
+
     socket.on("waiting", () => setWaiting(true));
 
     socket.on(
@@ -310,6 +155,7 @@ const Game = () => {
         setStatusMessage(
           playerIndex === turnInd ? "Your Turn" : `${opponent}'s Turn`
         );
+        setStart(true);
       }
     );
 
@@ -324,7 +170,7 @@ const Game = () => {
       socket.off("starting");
       socket.off("joinError");
     };
-  }, [socket, selectedAvatar, opponentAvatar, minefield, waiting, playerIndex]);
+  }, [socket, selectedAvatar, opponentAvatar, minefield, waiting, playerIndex, start]);
 
   useEffect(() => {
     socket.on("update", ({ gameState, turnInd, scoreArray }) =>
@@ -355,12 +201,14 @@ const Game = () => {
       <>
         <Wait display={waiting} room={room} />
         <Status message={statusMessage} />
+        <StartModal start={start} setStart={setStart} />
         <Scoreboard
           player={playerName}
           playerScore={currentPlayerScore}
           opponent={opponentPlayer[0]}
           opponentScore={opponentPlayer[1]}
         />
+        <CountdownTimer isActive={timer} onTimeout={handleTimeout}/>
         <ShowAvatar avatar={selectedAvatar}/>
         <ShowAvatar avatar={opponentAvatar}/>
         <button onClick={handleRestartButton}>Restart</button>

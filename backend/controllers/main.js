@@ -124,7 +124,9 @@ exports.initializeSocket = (io) => {
     socket.on("move", ({ room, playerIndex, row, col }) => {
       console.log(row, col, playerIndex);
       currentGrid = activeRooms.get(room).grid;
-      currentGrid.move(row, col, playerIndex);
+      if (row !== undefined && col !== undefined) {
+        currentGrid.move(row, col, playerIndex);
+      }
       if (currentGrid.checkEnd()) {
         io.to(room).emit("winner", {
           gameState: currentGrid.revealedCells,

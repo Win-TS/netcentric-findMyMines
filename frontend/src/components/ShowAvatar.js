@@ -8,7 +8,7 @@ import avatar6 from "../assets/avatar6.png";
 import avatar7 from "../assets/avatar7.png";
 import avatar8 from "../assets/avatar8.png";
 
-const ShowAvatar = (avatar) =>{
+const ShowAvatar = ({avatar}) =>{
     switch(avatar){
         case "avatar1" : return <img src={avatar1} alt="Avatar1"></img>
         case "avatar2" : return <img src={avatar2} alt="Avatar2"></img>
