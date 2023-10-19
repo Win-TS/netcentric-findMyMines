@@ -6,18 +6,20 @@ const Choice = ({ logo, onChoice }) => {
     <>
       <div className="choice-container">
         {/* <a href="/"><img src={logo} alt='FindMyMines'/></a> */}
+        <div className ="startnew">
         <ChoiceButton
           onChoice={onChoice}
-          type="primary"
+          type="none"
           choice="new"
-          label="Start New"
-        />
+          label="Start New Game"
+        /></div>
+        <div className="joingame">
         <ChoiceButton
           onChoice={onChoice}
-          type="secondary"
+          type="none"
           choice="join"
           label="Join Game"
-        />
+        /></div>
       </div>
     </>
   );

@@ -124,6 +124,22 @@
   margin: 120px;
 }
 
+/* Avatar.css */
+.exit {
+  position: absolute;
+  top: 0; /* Position at the top of the container */
+  right: 0; /* Position at the right of the container */
+  padding: 10px; /* Adjust as needed to add space around the button */
+  cursor: pointer; /* Add a cursor style to indicate it's clickable */
+  border: none;
+  background-color: white;
+}
+
+/* If you want to change the button color */
+.exit-button-container svg {
+  fill: #f24e1e; /* Adjust the color as needed */
+}
+
 /* BackComponent.css */
 .back {
   background-color: #617a55; /* Sets the background color to green */
@@ -168,7 +184,8 @@
 }
 
 .grid {
-  max-height: 400px; /* Adjust the height as needed */
+  position: relative;
+  max-height: 450px; /* Adjust the height as needed */
   overflow-y: auto; /* Enable vertical scrolling when content overflows */
   border: 1px solid #ccc; /* Optional: Add a border to visualize the container */
   border-radius: 5px; /* Optional: Add rounded corners */
@@ -176,7 +193,9 @@
   background-color: #d0e7d2;
   margin-top: 5px;
 }
-
+.star {
+  position:absolute;
+}
 .trophies {
   display: block;
 }
@@ -206,3 +225,433 @@
 }
 
 /* End of Leaderboard */
+
+/* Start of Avatar */
+/* Avatar.css */
+
+.avatar-selection-page {
+  text-align: center;
+  padding: 20px;
+  background-color: #FAF0E6;
+}
+
+.text h1 {
+  font-weight: bold; /* Set the text within h1 to be bold */
+  font-family: 'Kanit', sans-serif; /* Use the Kanit font */
+  font-size: 52px; /* Set the desired font size in pixels */
+  margin-bottom: 40px;
+}
+
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns, adjust as needed */
+  grid-gap: 40px; /* Adjust the gap between avatars */
+}
+
+/* Style the AvatarSelection component */
+.image {
+  background-color: #FCCBBF;
+  border: 4px solid black; /* Border style and color */
+  border-radius: 10px;
+  padding: 10px; /* Add some spacing around avatars */
+  padding-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Center the main menu button */
+#mainmenu-btn {
+  margin-top: 20px;
+}
+
+/* End of Avatar */
+
+/* Start of Wait */
+/* Wait.css */
+.copy {
+  display: flex;
+  font-family: "Kanit" , sans-serif;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  text-align: center; /* Center text within the container */
+  background-color: #FAF0E6;
+  min-height: 100vh;
+  padding-bottom: 500px;
+}
+
+.copy-message {
+  font-weight:400;
+  margin-bottom: 10px;
+}
+
+.copy-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+}
+
+.copy-box {
+  display: flex;
+  align-items: center; /* Center elements horizontally on the same line */
+  margin-bottom: 10px;
+}
+
+.room-label {
+  font-weight: 400;
+}
+
+.copy-area {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.copy-button {
+  display: inline-flex; /* Display the button next to the input */
+  align-items: center; /* Center button content vertically */
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px; /* Add spacing between the input and button */
+}
+
+.wait-message {
+  font-weight: 400;
+  margin-top: 10px;
+}
+#back-btn {
+  background-color: #D9D9D9;
+  display: flex;
+  align-items: center; /* Vertically align content */
+  font-size: 20px;
+  color: black;
+}
+
+.backarrow svg {
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+.back-button {
+  text-decoration: none;
+}
+
+/* Add hover styles for the link if needed */
+.back-button:hover {
+  text-decoration: none; /* To remove underline on hover */
+}
+
+
+
+
+/* End of Wait */
+
+/* Start of InputForm */
+.input-container {
+  font-family: "Kanit", sans-serif;
+  display: flex;
+
+}
+.seldiff h1{
+  font-family: "Kanit", sans-serif;
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px gray;
+}
+.name-box {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+.difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 350px; /* Set a fixed width and height for a square container */
+  height: 300px;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: #FFF8D6;
+  text-align: center;
+  font-size: 16px;
+}
+.easy,
+.med,
+.hard
+{
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  width: 300px;
+  height: 70px;
+  margin: 10px;
+}
+
+.easy {
+  background-color: #EDD7B3;
+  color: #BB1F1F;
+
+}
+
+.easy .btn {
+  color: #BB1F1F;
+  width: 300px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 32px;
+}
+
+.med {
+  background-color: #C08261;
+  color:black;
+}
+.med .btn {
+  color:black;
+  width: 300px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 32px;
+}
+.hard {
+  background-color: #9A3B3B;
+  color:#FFF8D6;
+}
+.hard .btn {
+  color:#FFF8D6;
+  width: 300px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 32px;
+}
+
+/* YourComponent.css */
+
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #FAF0E6;
+  padding-bottom: 500px;
+}
+
+.namebox,
+.roombox {
+  margin: 10px;
+}
+
+.namebox input,
+.roombox input {
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: column; /* Change flex-direction to column */
+  align-items: center; /* Align items in the center */
+  margin-top: 20px;
+}
+.backbtn {
+  background-color: #D9D9D9;
+  color: black;
+  border-radius: 5px;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.backbtn .btn {
+  background-color: #D9D9D9;
+  color: black;
+  width: 300px;
+  font-weight: bold;
+  font-size: 25px;
+
+}
+
+.joinbtn {
+  background-color: #FFD9C0;
+  color: black;
+  border-radius: 5px;
+  width: 300px;
+  height: 50px;
+
+}
+.joinbtn .btn {
+  background-color: #FFD9C0;
+  color: black;
+  width: 300px;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.title {
+  font-size: 36px; /* Adjust the font size as needed */
+  text-align: center; /* Center align the title */
+  margin-bottom: 20px; /* Add spacing below the title */
+  color: #D4492A;
+  font-weight: 800;
+  text-shadow: 1px 1px 1px gray;
+}
+
+
+/* End of InputForm */
+
+/* Start of Choice Start New Join Game */
+.choice-container {
+  display: flex;
+  background-color: #FFF6E9;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: "Kanit", "san-serif";
+}
+
+.choice-container .startnew {
+  margin-right: 10px; /* Add space to the right of the "Start New" button */
+}
+
+.choice-container .joingame {
+  margin-left: 10px; /* Add space to the left of the "Join Game" button */
+}
+.startnew .btn {
+  background-color: white;
+  color: #8c8c8c;
+  width: 250px;
+  font-size: 20px;
+
+}
+
+.startnew {
+  background-color:white;
+  color:#8c8c8c;
+  border: 2px solid whitesmoke;
+  border-radius: 10px;
+  width: 250px;
+  height: 50px;
+}
+
+.joingame {
+  background-color:white;
+  color:#8c8c8c;
+  border: 2px solid whitesmoke;
+  border-radius: 10px;
+  width: 250px;
+  height: 50px;
+}
+.joingame .btn {
+  background-color: white;
+  color: #8c8c8c;
+  width: 250px;
+  font-size: 20px;
+}
+
+/* End of Choice Start New Join Game */
+
+/* Start of MainMenu */
+.mainmenu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFF6E9;
+  padding: 10px; /* Add padding to create spacing around the content */
+  font-family: "Kanit", "san-serif";
+}
+
+.maintitle h1{
+  margin-bottom: 5px; /* Add margin at the bottom of the title */
+  color:#D4492A;
+  font-weight: 700;
+  text-shadow: 1px 1px 1px gray;
+}
+
+#leaderboard-btn,
+#avatar-btn {
+  margin: 10px 0; /* Add margin above and below the buttons */
+  width: 420px; /* Adjust the width of the buttons if needed */
+  height: 70px;
+  border-radius: 10px;
+  font-size: 35px;
+  font-weight: bold;
+}
+#avatar-btn {
+  background-color: #B5CB99;
+  color: black;
+}
+#leaderboard-btn {
+  background-color: #186F65;
+
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #FFF6E9; 
+}
+.theme-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 10px; /* Add margin for spacing */
+}
+.theme h2{
+  color:#8c8c8c;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+ #day-btn, #night-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: none;
+  width: 100px;
+  height: 40px; /* Increased height for better alignment */
+  background-color: #FFD9C0;
+  margin-top: 10px; /* Add space between each pair */
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+#day-btn {
+  margin-top:5px;
+}
+.daynight {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+}
+
+
+
+
