@@ -10,14 +10,14 @@ import avatar8 from "../assets/avatar8.png";
 
 const ShowAvatar = ({avatar}) =>{
     switch(avatar){
-        case "avatar1" : return <img src={avatar1} alt="Avatar1"></img>
-        case "avatar2" : return <img src={avatar2} alt="Avatar2"></img>
-        case "avatar3" : return <img src={avatar3} alt="Avatar3"></img>
-        case "avatar4" : return <img src={avatar4} alt="Avatar4"></img>
-        case "avatar5" : return <img src={avatar5} alt="Avatar5"></img>
-        case "avatar6" : return <img src={avatar6} alt="Avatar6"></img>
-        case "avatar7" : return <img src={avatar7} alt="Avatar7"></img>
-        case "avatar8" : return <img src={avatar8} alt="Avatar8"></img>
+        case "avatar1" : return <img src={avatar1} alt="Avatar1" width='200px' height='200px'></img>
+        case "avatar2" : return <img src={avatar2} alt="Avatar2" width='200px' height='200px'></img>
+        case "avatar3" : return <img src={avatar3} alt="Avatar3" width='200px' height='200px'></img>
+        case "avatar4" : return <img src={avatar4} alt="Avatar4" width='200px' height='200px'></img>
+        case "avatar5" : return <img src={avatar5} alt="Avatar5" width='200px' height='200px'></img>
+        case "avatar6" : return <img src={avatar6} alt="Avatar6" width='200px' height='200px'></img>
+        case "avatar7" : return <img src={avatar7} alt="Avatar7" width='200px' height='200px'></img>
+        case "avatar8" : return <img src={avatar8} alt="Avatar8" width='200px' height='200px'></img>
     }
 
 }
