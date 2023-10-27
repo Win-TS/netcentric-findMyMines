@@ -8,38 +8,63 @@ const roomArray = [];
 let peopleInRoom;
 
 const makeRoom = (difficulty) => {
-  let newRoom = randRoom();
-  while (activeRooms.has(newRoom)) {
-    newRoom = randRoom();
+  try {
+    let newRoom = randRoom();
+    while (activeRooms.has(newRoom)) {
+      newRoom = randRoom();
+    }
+    activeRooms.set(newRoom, {
+      roomId: newRoom,
+      players: [],
+      difficulty: difficulty,
+      grid: null,
+    });
+    return newRoom;
+  } catch (error) {
+    console.error("Error in makeRoom function:", error);
+    throw error;
   }
-  activeRooms.set(newRoom, {
-    roomId: newRoom,
-    players: [],
-    difficulty: difficulty,
-    grid: null,
-  });
-  return newRoom;
 };
 
 const joinRoom = (player, room) => {
-  let currentRoom = activeRooms.get(room);
-  updatedPlayerList = currentRoom.players.push(player);
-  updatedRoom = { ...activeRooms.get(room), players: updatedPlayerList };
+  try {
+    let currentRoom = activeRooms.get(room);
+    updatedPlayerList = currentRoom.players.push(player);
+    updatedRoom = { ...activeRooms.get(room), players: updatedPlayerList };
+  } catch (error) {
+    console.error("Error in joinRoom function:", error);
+    throw error;
+  }
 };
 
 const kick = (room) => {
-  currentRoom = activeRooms.get(room);
-  currentRoom.players.pop();
-};
-
-const getRoomPlayersNum = (room) => {
-  return activeRooms.get(room).players.length;
+  try {
+    currentRoom = activeRooms.get(room);
+    currentRoom.players.pop();
+  } catch (error) {
+    console.error("Error in kick function:", error);
+    throw error;
+  }
 };
 
 const newGame = (room, difficulty, firstPlayer) => {
-  currentRoom = activeRooms.get(room);
-  const grid = new Grid(difficulty, firstPlayer);
-  currentRoom.grid = grid;
+  try {
+    currentRoom = activeRooms.get(room);
+    const grid = new Grid(difficulty, firstPlayer);
+    currentRoom.grid = grid;
+  } catch (error) {
+    console.error("Error in newGame function:", error);
+    throw error;
+  }
+};
+
+const getRoomPlayersNum = (room) => {
+  try {
+    return activeRooms.get(room).players.length;
+  } catch (error) {
+    console.error("Error in getRoomPlayersNum function:", error);
+    throw error;
+  }
 };
 
 exports.initializeSocket = (io) => {
@@ -79,16 +104,16 @@ exports.initializeSocket = (io) => {
         }
 
         if (peopleInRoom === 2) {
-            let currentRoom = activeRooms.get(room);
-            currentPlayers = currentRoom.players;
-            
+          let currentRoom = activeRooms.get(room);
+          currentPlayers = currentRoom.players;
+
           if (!roomArray.includes(room)) {
             roomArray.push(room);
             let firstPlayer = randFirstPlayer();
             io.to(room).emit("setFirstPlayer", {
               firstPlayer: firstPlayer,
             });
-            newGame(room, currentRoom.difficulty, firstPlayer)
+            newGame(room, currentRoom.difficulty, firstPlayer);
           }
 
           let minefield = currentRoom.grid.minefield;
@@ -109,7 +134,6 @@ exports.initializeSocket = (io) => {
             turnInd,
             avatars,
           });
-
         }
 
         if (peopleInRoom === 3) {
@@ -117,12 +141,10 @@ exports.initializeSocket = (io) => {
           kick(room);
           io.to(socket.id).emit("joinError");
         }
-
       }
     );
 
     socket.on("move", ({ room, playerIndex, row, col }) => {
-      console.log(row, col, playerIndex);
       currentGrid = activeRooms.get(room).grid;
       if (row !== undefined && col !== undefined) {
         currentGrid.move(row, col, playerIndex);
@@ -131,14 +153,14 @@ exports.initializeSocket = (io) => {
         io.to(room).emit("winner", {
           gameState: currentGrid.revealedCells,
           turnInd: currentGrid.playerTurn,
-          scoreArray: currentGrid.score
+          scoreArray: currentGrid.score,
         });
       } else {
         currentGrid.switchTurn();
         io.to(room).emit("update", {
           gameState: currentGrid.revealedCells,
           turnInd: currentGrid.playerTurn,
-          scoreArray: currentGrid.score
+          scoreArray: currentGrid.score,
         });
         console.log(currentGrid.score);
       }
@@ -147,8 +169,7 @@ exports.initializeSocket = (io) => {
     socket.on("playAgainRequest", (room) => {
       currentRoom = activeRooms.get(room);
       currentRoom.grid.reset();
-      console.log(currentRoom)
-
+      console.log(currentRoom);
 
       io.to(room).emit("restart", {
         gameState: currentRoom.grid.revealedCells,

@@ -6,6 +6,7 @@ import Choice from "../components/Choice";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
 
+import qs from "qs";
 import io from "socket.io-client";
 const ENDPOINT = "http://localhost:9000/";
 
@@ -23,10 +24,18 @@ class MainMenu extends Component {
       serverConfirmed: false,
       error: false,
       errorMessage: "",
+      selectedAvatar: ""
     };
   }
 
   componentDidMount = () => {
+    const { selectedAvatar } = qs.parse(
+      window.location.search,
+      {
+        ignoreQueryPrefix: true,
+      }
+    );
+    this.setState({ selectedAvatar });
     this.socket = io(ENDPOINT);
     this.socket.on("newGameCreated", ({ room, difficulty }) => {
       this.setState({ serverConfirmed: true, room: room });
@@ -78,7 +87,6 @@ class MainMenu extends Component {
     if (this.state.newGame && this.validateNew()) {
       this.socket.emit("newGame", { difficulty: this.state.difficulty });
     } else if (this.state.newGame === false && this.validateJoin()) {
-      console.log(this.state.room);
       this.socket.emit("joining", { room: this.state.room });
     } else {
       setTimeout(() => this.setState({ loading: false }), 500);
@@ -120,7 +128,7 @@ class MainMenu extends Component {
     if (this.state.serverConfirmed) {
       return (
         <Navigate
-          to={`/game?room=${this.state.room}&name=${this.state.name}&difficulty=${this.state.difficulty}&playerIndex=${this.state.playerIndex}`}
+          to={`/game?room=${this.state.room}&name=${this.state.name}&difficulty=${this.state.difficulty}&playerIndex=${this.state.playerIndex}&avatar=${this.state.selectedAvatar}`}
         />
       );
     } else {

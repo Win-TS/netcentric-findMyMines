@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Wait = ({ room, display }) => {
   const textArea = useRef(null);

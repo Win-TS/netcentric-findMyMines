@@ -32,7 +32,6 @@ const Game = () => {
   const [opponentPlayer, setOpponentPlayer] = useState([]);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [opponentAvatar, setOpponentAvatar] = useState(null);
-  const [streakBombs, setStreakBombs] = useState(0);
   const [waiting, setWaiting] = useState(false);
   const [joinError, setJoinError] = useState(false);
 
@@ -69,10 +68,13 @@ const Game = () => {
     currentOpponentPlayer[1] = scoreArray[playerIndex === 0 ? 1 : 0];
     setOpponentPlayer(currentOpponentPlayer);
     setEnd(true);
+    // axios post leaderboard score
   };
+
   const handleRestartButton = () => {
     socket.emit("playAgainRequest", room)
   }
+
   const handleRestart = (gameState, turnInd, minefield) => {
     console.log(gameState)
     setGame(gameState);
@@ -108,18 +110,19 @@ const Game = () => {
   };
 
   useEffect(() => {
-    let { room, name, difficulty, playerInd, avatar } = qs.parse(
+    let { room, name, difficulty, playerIndex, avatar } = qs.parse(
       window.location.search,
       {
         ignoreQueryPrefix: true,
       }
     );
-    playerInd = Number(playerInd);
+    playerIndex = Number(playerIndex);
     if (avatar === "undefined" || avatar === "null") avatar = "avatar1";
     setPlayerName(name);
     setRoom(room);
-    setPlayerIndex(playerInd);
+    setPlayerIndex(playerIndex);
     setSelectedAvatar(avatar);
+    console.log(playerIndex);
     if (difficulty === "easy") {
       setSize(6);
     } else if (difficulty === "medium") {
@@ -132,7 +135,7 @@ const Game = () => {
       name,
       difficulty,
       avatar,
-      playerInd,
+      playerIndex,
     });
   }, []);
 
@@ -150,7 +153,8 @@ const Game = () => {
         setOpponentPlayer([opponent, 0]);
         setEnd(false);
         setGame(gameState);
-        console.log(opponentAvatar);
+        console.log(minefield, players, turnInd, opponentAvatar);
+        console.log(playerIndex);
         setTurn(playerIndex === turnInd);
         setStatusMessage(
           playerIndex === turnInd ? "Your Turn" : `${opponent}'s Turn`
@@ -174,10 +178,10 @@ const Game = () => {
 
   useEffect(() => {
     socket.on("update", ({ gameState, turnInd, scoreArray }) =>
-      handleUpdate(gameState, turnInd, scoreArray)
+      handleUpdate(gameState, turnInd, scoreArray )
     );
     socket.on("winner", ({ gameState, scoreArray }) =>
-      handleWin(gameState, scoreArray)
+      handleWin(gameState, scoreArray )
     );
     socket.on("restart", ({ gameState, turnInd, minefield }) =>
       handleRestart(gameState, turnInd, minefield)

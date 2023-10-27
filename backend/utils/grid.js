@@ -16,11 +16,13 @@ class Grid {
       .fill(null)
       .map(() => new Array(this.size).fill(false));
     this.revealedBombs = 0;
+    this.streakBombs = [0, 0];
     this.playerTurn = playerTurn;
     this.score = [0, 0];
     this.end = false;
   }
 
+  // golden bomb logic
   generateMinefield = () => {
     const randomGrid = Array(this.size)
       .fill()
@@ -41,11 +43,29 @@ class Grid {
   move = (row, col, player) => {
     if (!this.revealedCells[row][col] && !this.end) {
       this.revealedCells[row][col] = true;
-      if (this.minefield[row][col]) {
+      if (this.minefield[row][col] === 1) {
         this.score[player]++;
         this.revealedBombs++;
+        if (this.streakBombs[player] < 2) {
+          this.streakBombs[player]++;
+        } else if (this.streakBombs[player] === 2) {
+          this.score[player]++;
+          this.streakBombs[player] = 0;
+        }
+        console.log(player, this.score);
+      } else if (this.minefield[row][col] === 2) {
+        this.score[player] += 3;
+        this.revealedBombs++;
+        if (this.streakBombs[player] < 2) {
+          this.streakBombs[player]++;
+        } else if (this.streakBombs[player] === 2) {
+          this.score[player]++;
+          this.streakBombs[player] = 0;
+        }
         console.log(player, this.score);
       }
+    } else {
+      this.streakBombs[player] = 0;
     }
   };
 
@@ -68,9 +88,11 @@ class Grid {
       this.playerTurn = 1;
     }
     this.score = [0, 0];
+    this.streakBombs = [0, 0];
     this.revealedBombs = 0;
   };
 
+  // change check logic for golden bomb
   checkEnd = () => {
     return this.score.some(playerScore => (playerScore === Math.ceil(this.numMines/2)));
   };

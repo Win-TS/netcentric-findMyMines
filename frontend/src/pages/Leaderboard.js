@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Navigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Leaderboard = () => {
   const [leaderboards, setLeaderboards] = useState([]);
