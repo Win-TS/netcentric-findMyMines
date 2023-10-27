@@ -329,12 +329,14 @@
 }
 
 .scoreboard-player {
-  margin-left: 100px;
+  margin-right: auto;
+  margin-left: auto;
   order: 1; /* Place player on the right */
 }
 
 .scoreboard-opponent {
-  margin-right: 100px;
+  margin-right: auto;
+  margin-left: auto;
   order: 2; /* Place opponent on the left */
 }
 
@@ -761,4 +763,24 @@ body, html {
   display: flex;
   justify-content: center; /* Center horizontally */
 }
+
+
+/* start of game page */
+
+#default-background-color-font{
+  background-color: #FFF6E9;
+  font-family: "Kanit" , sans-serif;
+}
+
+.in-line-grid{
+  display: flex;
+}
+
+.findmymines-text{
+  font-family: "Kanit" , sans-serif;
+  font-size: 70px;
+  color: #D4492A;
+  font-weight: bold;
+}
+
 

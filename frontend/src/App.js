@@ -20,7 +20,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" id='default-background-color-font'>
       <button onClick={playAudio}>Play Background Music</button>
       <Router>
         <OnlineClients />

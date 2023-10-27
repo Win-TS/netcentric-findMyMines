@@ -7,10 +7,6 @@ const Scoreboard = ({ player, playerScore, opponent, opponentScore }) => {
         <h1>{player}</h1>
         <h3>{playerScore}</h3>
       </div>
-      <div className="scoreboard-opponent">
-        <h1>{opponent}</h1>
-        <h3>{opponentScore}</h3>
-      </div>
     </div>
   );
 };

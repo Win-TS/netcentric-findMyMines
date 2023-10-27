@@ -203,25 +203,37 @@ const Game = () => {
     }
     return (
       <>
+      <div className="findmymines-text">
+          FINDMYMINES
+        </div>
+        <StartModal start={start} setStart={setStart} />
         <Wait display={waiting} room={room} />
         <Status message={statusMessage} />
-        <StartModal start={start} setStart={setStart} />
-        <Scoreboard
-          player={playerName}
-          playerScore={currentPlayerScore}
-          opponent={opponentPlayer[0]}
-          opponentScore={opponentPlayer[1]}
-        />
         <CountdownTimer isActive={timer} onTimeout={handleTimeout}/>
-        <ShowAvatar avatar={selectedAvatar}/>
-        <ShowAvatar avatar={opponentAvatar}/>
+        <div className="in-line-grid">
+          <div>
+            <Scoreboard
+              player={playerName}
+              playerScore={currentPlayerScore}
+            />
+            <ShowAvatar avatar={selectedAvatar}/>
+          </div>
+          
+          <div className={`grid-div-${size}`}>{gridArray}</div>
+          <div>
+            <Scoreboard
+              player={opponentPlayer[0]}
+              playerScore={opponentPlayer[1]}
+            />
+            <ShowAvatar avatar={opponentAvatar}/>
+          </div>
+        </div>
         <button onClick={handleRestartButton}>Restart</button>
         <ResultModal
           score={currentPlayerScore}
           opponentScore={opponentPlayer[1]}
           end={end}
         />
-        <div className={`grid-div-${size}`}>{gridArray}</div>
       </>
     );
   }
