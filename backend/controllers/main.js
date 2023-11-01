@@ -69,6 +69,8 @@ const getRoomPlayersNum = (room) => {
 
 exports.initializeSocket = (io) => {
   io.on("connection", (socket) => {
+    io.emit("onlineClients", io.engine.clientsCount);
+
     socket.on("newGame", ({ difficulty }) => {
       let room = makeRoom(difficulty);
       socket.emit("newGameCreated", { room, difficulty });
@@ -178,6 +180,18 @@ exports.initializeSocket = (io) => {
       });
     });
 
+    socket.on("clearRooms", () => {
+      roomArray.forEach((room) => {
+        const currentRoom = activeRooms.get(room);
+        currentRoom.grid.reset();
+        io.to(room).emit("restart", {
+          gameState: currentRoom.grid.revealedCells,
+          turnInd: currentRoom.grid.playerTurn,
+          minefield: currentRoom.grid.minefield,
+        });
+      });
+    });
+
     socket.on("disconnect", () => {
       const currentRooms = Object.keys(socket.rooms);
       if (currentRooms.length === 2) {
@@ -202,6 +216,7 @@ exports.initializeSocket = (io) => {
       if (playerIndex !== -1) {
         activePlayers.splice(playerIndex, 1);
       }
+      // io.emit("onlineClients", io.engine.clientsCount);
     });
   });
 

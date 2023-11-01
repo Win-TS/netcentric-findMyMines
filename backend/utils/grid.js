@@ -22,18 +22,27 @@ class Grid {
     this.end = false;
   }
 
-  // golden bomb logic
   generateMinefield = () => {
     const randomGrid = Array(this.size)
       .fill()
       .map(() => Array(this.size).fill(0));
+    const totalMines = this.numMines;
+    const numTwos = Math.floor(totalMines / 4);
     let i = 0;
-    const positions = [];
-    while (i < this.numMines) {
-      let random = Math.floor(Math.random() * (this.size * this.size - 1));
-      if (!positions.includes(random)) {
-        positions.push(random);
-        randomGrid[Math.floor(random / this.size)][random % this.size] = 1;
+    while (i < numTwos) {
+      let row = Math.floor(Math.random() * this.size);
+      let col = Math.floor(Math.random() * this.size);
+      if (randomGrid[row][col] !== 2) {
+        randomGrid[row][col] = 2;
+        i++;
+      }
+    }
+    i = 0;
+    while (i < totalMines - numTwos) {
+      let row = Math.floor(Math.random() * this.size);
+      let col = Math.floor(Math.random() * this.size);
+      if (randomGrid[row][col] !== 2) {
+        randomGrid[row][col] = 1;
         i++;
       }
     }
@@ -71,7 +80,7 @@ class Grid {
 
   switchTurn = () => {
     if (this.playerTurn === 0) {
-      this.playerTurn = 1
+      this.playerTurn = 1;
     } else if (this.playerTurn === 1) {
       this.playerTurn = 0;
     }
@@ -92,9 +101,11 @@ class Grid {
     this.revealedBombs = 0;
   };
 
-  // change check logic for golden bomb
   checkEnd = () => {
-    return this.score.some(playerScore => (playerScore === Math.ceil(this.numMines/2)));
+    const totalScore = (this.numMines * 3/4) + ((this.numMines * 1/4) * 3)
+    return this.score.some(
+      (playerScore) => playerScore === Math.ceil(totalScore / 2)
+    );
   };
 }
 

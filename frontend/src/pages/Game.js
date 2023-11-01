@@ -46,7 +46,7 @@ const Game = () => {
     if (!end && turn) {
       socket.emit("move", { room });
     }
-  }
+  };
 
   const handleUpdate = (gameState, turnInd, scoreArray) => {
     setGame(gameState);
@@ -72,22 +72,21 @@ const Game = () => {
   };
 
   const handleRestartButton = () => {
-    socket.emit("playAgainRequest", room)
-  }
+    socket.emit("playAgainRequest", room);
+  };
 
   const handleRestart = (gameState, turnInd, minefield) => {
-    console.log(gameState)
     setGame(gameState);
-    setEnd(false)
+    setEnd(false);
     setStatusMessage(
       playerIndex === turnInd ? "Your Turn" : `${opponentPlayer[0]}'s Turn`
-    )
+    );
     setCurrentPlayerScore(0);
     let currentOpponentPlayer = [...opponentPlayer];
     currentOpponentPlayer[1] = 0;
     setOpponentPlayer(currentOpponentPlayer);
     setMinefield(minefield);
-  }
+  };
 
   const renderGrid = (row, col) => {
     if (minefield) {
@@ -122,7 +121,6 @@ const Game = () => {
     setRoom(room);
     setPlayerIndex(playerIndex);
     setSelectedAvatar(avatar);
-    console.log(playerIndex);
     if (difficulty === "easy") {
       setSize(6);
     } else if (difficulty === "medium") {
@@ -140,7 +138,6 @@ const Game = () => {
   }, []);
 
   useEffect(() => {
-
     socket.on("waiting", () => setWaiting(true));
 
     socket.on(
@@ -153,8 +150,7 @@ const Game = () => {
         setOpponentPlayer([opponent, 0]);
         setEnd(false);
         setGame(gameState);
-        console.log(minefield, players, turnInd, opponentAvatar);
-        console.log(playerIndex);
+        console.log(minefield);
         setTurn(playerIndex === turnInd);
         setStatusMessage(
           playerIndex === turnInd ? "Your Turn" : `${opponent}'s Turn`
@@ -174,14 +170,22 @@ const Game = () => {
       socket.off("starting");
       socket.off("joinError");
     };
-  }, [socket, selectedAvatar, opponentAvatar, minefield, waiting, playerIndex, start]);
+  }, [
+    socket,
+    selectedAvatar,
+    opponentAvatar,
+    minefield,
+    waiting,
+    playerIndex,
+    start,
+  ]);
 
   useEffect(() => {
     socket.on("update", ({ gameState, turnInd, scoreArray }) =>
-      handleUpdate(gameState, turnInd, scoreArray )
+      handleUpdate(gameState, turnInd, scoreArray)
     );
     socket.on("winner", ({ gameState, scoreArray }) =>
-      handleWin(gameState, scoreArray )
+      handleWin(gameState, scoreArray)
     );
     socket.on("restart", ({ gameState, turnInd, minefield }) =>
       handleRestart(gameState, turnInd, minefield)
@@ -203,36 +207,31 @@ const Game = () => {
     }
     return (
       <>
-      <div className="findmymines-text">
-          FINDMYMINES
-        </div>
+        <div className="findmymines-text">FINDMYMINES</div>
         <StartModal start={start} setStart={setStart} />
         <Wait display={waiting} room={room} />
         <Status message={statusMessage} />
-        <CountdownTimer isActive={timer} onTimeout={handleTimeout}/>
+        <CountdownTimer isActive={timer} onTimeout={handleTimeout} />
         <div className="in-line-grid">
           <div>
-            <Scoreboard
-              player={playerName}
-              playerScore={currentPlayerScore}
-            />
-            <ShowAvatar avatar={selectedAvatar}/>
+            <Scoreboard player={playerName} playerScore={currentPlayerScore} />
+            <ShowAvatar avatar={selectedAvatar} />
           </div>
-          
+
           <div className={`grid-div-${size}`}>{gridArray}</div>
           <div>
             <Scoreboard
               player={opponentPlayer[0]}
               playerScore={opponentPlayer[1]}
             />
-            <ShowAvatar avatar={opponentAvatar}/>
+            <ShowAvatar avatar={opponentAvatar} />
           </div>
         </div>
-        <button onClick={handleRestartButton}>Restart</button>
         <ResultModal
           score={currentPlayerScore}
           opponentScore={opponentPlayer[1]}
           end={end}
+          restart={handleRestartButton}
         />
       </>
     );
