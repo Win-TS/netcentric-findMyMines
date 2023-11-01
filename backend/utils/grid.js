@@ -41,7 +41,7 @@ class Grid {
     while (i < totalMines - numTwos) {
       let row = Math.floor(Math.random() * this.size);
       let col = Math.floor(Math.random() * this.size);
-      if (randomGrid[row][col] !== 2) {
+      if (randomGrid[row][col] === 0) {
         randomGrid[row][col] = 1;
         i++;
       }
@@ -102,9 +102,9 @@ class Grid {
   };
 
   checkEnd = () => {
-    const totalScore = (this.numMines * 3/4) + ((this.numMines * 1/4) * 3)
+    const totalScore = (this.numMines * 3) / 4 + ((this.numMines * 1) / 4) * 3;
     return this.score.some(
-      (playerScore) => playerScore === Math.ceil(totalScore / 2)
+      (playerScore) => playerScore >= Math.ceil(totalScore / 2)
     );
   };
 }

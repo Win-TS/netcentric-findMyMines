@@ -147,24 +147,32 @@ exports.initializeSocket = (io) => {
     );
 
     socket.on("move", ({ room, playerIndex, row, col }) => {
-      currentGrid = activeRooms.get(room).grid;
-      if (row !== undefined && col !== undefined) {
-        currentGrid.move(row, col, playerIndex);
-      }
-      if (currentGrid.checkEnd()) {
-        io.to(room).emit("winner", {
-          gameState: currentGrid.revealedCells,
-          turnInd: currentGrid.playerTurn,
-          scoreArray: currentGrid.score,
-        });
-      } else {
-        currentGrid.switchTurn();
-        io.to(room).emit("update", {
-          gameState: currentGrid.revealedCells,
-          turnInd: currentGrid.playerTurn,
-          scoreArray: currentGrid.score,
-        });
-        console.log(currentGrid.score);
+      try {
+        const currentRoom = activeRooms.get(room);
+        if (!currentRoom) {
+          console.error(`Room ${room} not found.`);
+          return;
+        }
+        const currentGrid = currentRoom.grid;
+        if (row !== undefined && col !== undefined) {
+          currentGrid.move(row, col, playerIndex);
+        }
+        if (currentGrid.checkEnd()) {
+          io.to(room).emit("winner", {
+            gameState: currentGrid.revealedCells,
+            scoreArray: currentGrid.score,
+          });
+        } else {
+          currentGrid.switchTurn();
+          io.to(room).emit("update", {
+            gameState: currentGrid.revealedCells,
+            turnInd: currentGrid.playerTurn,
+            scoreArray: currentGrid.score,
+          });
+          console.log(currentGrid.score);
+        }
+      } catch (error) {
+        console.error("Error in move event handler:", error);
       }
     });
 
