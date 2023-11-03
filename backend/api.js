@@ -22,8 +22,8 @@ const scoreRouter = require("./routes/scoreRoutes");
 const mainController = require("./controllers/main");
 const errorController = require("./controllers/errors");
 const mongoUri =
-  //"mongodb+srv://myadmin:netcentric1234@findmyminesleaderboards.ggt3dht.mongodb.net/leaderboards";
-  "mongodb+srv://admin:pass1234@cluster0.euj7bfd.mongodb.net/?retryWrites=true&w=majority";
+  "mongodb+srv://myadmin:netcentric1234@findmyminesleaderboards.ggt3dht.mongodb.net/leaderboards";
+  //"mongodb+srv://admin:pass1234@cluster0.euj7bfd.mongodb.net/?retryWrites=true&w=majority";
 mainController.initializeSocket(io);
 
 mongoose
