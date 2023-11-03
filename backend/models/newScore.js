@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const ScoreSchema = new Schema({
   name: String,
   score: Number,
-  time: String,
+  difficulty: String,
 });
 
 const ScoreModel = mongoose.model("Leaderboard", ScoreSchema);

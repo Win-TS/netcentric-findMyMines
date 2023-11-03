@@ -22,15 +22,15 @@ const scoreRouter = require("./routes/scoreRoutes");
 const mainController = require("./controllers/main");
 const errorController = require("./controllers/errors");
 const mongoUri =
-  "mongodb+srv://myadmin:netcentric1234@findmyminesleaderboards.ggt3dht.mongodb.net/leaderboards";
-let onlineClients = 0;
-
+  //"mongodb+srv://myadmin:netcentric1234@findmyminesleaderboards.ggt3dht.mongodb.net/leaderboards";
+  "mongodb+srv://admin:pass1234@cluster0.euj7bfd.mongodb.net/?retryWrites=true&w=majority";
 mainController.initializeSocket(io);
 
 mongoose
   .connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    dbName: "findMyMines",
   })
   .then(() => {
     console.log("MongoDB connected");
@@ -39,14 +39,14 @@ mongoose
     console.error("MongoDB connection error:", err);
   });
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 
 app.use("/game", gameRouter);
 app.use("/score", scoreRouter);

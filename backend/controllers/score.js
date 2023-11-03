@@ -1,12 +1,11 @@
 const scoreModel = require("../models/newScore");
 
-// add difficulty
 exports.postNewScore = async (req, res) => {
   try {
     const newScore = await scoreModel.create({
       name: req.query.name,
       score: req.query.score,
-      time: req.query.time,
+      difficulty: req.query.difficulty,
     });
     res.send(newScore);
   } catch (err) {
@@ -16,9 +15,10 @@ exports.postNewScore = async (req, res) => {
 };
 
 exports.getLeaderboards = async (req, res) => {
+  const { difficulty } = req.query;
   try {
     const leaderboards = await scoreModel
-      .find()
+      .find({ difficulty })
       .sort({ score: -1 })
       .limit(15)
       .exec();

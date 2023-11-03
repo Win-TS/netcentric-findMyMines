@@ -11,6 +11,7 @@ import ResultModal from "../components/ResultModal";
 import ShowAvatar from "../components/ShowAvatar";
 import StartModal from "../components/StartModal";
 import CountdownTimer from "../components/CountdownTimer";
+import axios from "axios";
 
 const ENDPOINT = "http://localhost:9000/";
 const socket = io.connect(ENDPOINT);
@@ -20,6 +21,7 @@ const Game = () => {
   const [minefield, setMinefield] = useState(null);
   const [size, setSize] = useState(0);
   const [game, setGame] = useState(null);
+  const [difficulty, setDifficulty] = useState("");
   const [playerIndex, setPlayerIndex] = useState(-1);
   const [firstPlayer, setFirstPlayer] = useState(-1);
   const [turn, setTurn] = useState(true);
@@ -61,14 +63,18 @@ const Game = () => {
     setTimer(true);
   };
 
-  const handleWin = (gameState, scoreArray) => {
+  const handleWin = async (gameState, scoreArray) => {
     setGame(gameState);
     setCurrentPlayerScore(scoreArray[playerIndex]);
     let currentOpponentPlayer = [...opponentPlayer];
     currentOpponentPlayer[1] = scoreArray[playerIndex === 0 ? 1 : 0];
     setOpponentPlayer(currentOpponentPlayer);
     setEnd(true);
-    // axios post leaderboard score
+    await axios.post("http://localhost:9000/score/new-score", {
+      name: playerName,
+      score: currentOpponentPlayer,
+      difficulty: difficulty,
+    });
   };
 
   const handleRestartButton = () => {
@@ -121,6 +127,7 @@ const Game = () => {
     setRoom(room);
     setPlayerIndex(playerIndex);
     setSelectedAvatar(avatar);
+    setDifficulty(difficulty);
     if (difficulty === "easy") {
       setSize(6);
     } else if (difficulty === "medium") {
