@@ -195,7 +195,7 @@
 }
 
 .star {
-  position:absolute;
+  position: absolute;
 }
 
 .trophies {
@@ -244,7 +244,7 @@
   width: 50px;
   height: 50px;
   border: 1px solid whitesmoke;
-  
+
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -262,7 +262,6 @@
   align-items: center;
   margin: auto;
   border: 10px solid darkgrey;
-
 }
 
 .block-6 {
@@ -288,7 +287,7 @@
   border: 10px solid darkgrey;
 }
 
-.block-9{
+.block-9 {
   width: 65px;
   height: 65px;
   border: 1px solid grey;
@@ -340,16 +339,15 @@
   order: 2; /* Place opponent on the left */
 }
 
-
 .avatar-selection-page {
   text-align: center;
   padding: 20px;
-  background-color: #FAF0E6;
+  background-color: #faf0e6;
 }
 
 .text h1 {
   font-weight: bold; /* Set the text within h1 to be bold */
-  font-family: 'Kanit', sans-serif; /* Use the Kanit font */
+  font-family: "Kanit", sans-serif; /* Use the Kanit font */
   font-size: 52px; /* Set the desired font size in pixels */
   margin-bottom: 40px;
 }
@@ -362,7 +360,7 @@
 
 /* Style the AvatarSelection component */
 .image {
-  background-color: #FCCBBF;
+  background-color: #fccbbf;
   border: 4px solid black; /* Border style and color */
   border-radius: 10px;
   padding: 10px; /* Add some spacing around avatars */
@@ -383,18 +381,18 @@
 /* Wait.css */
 .copy {
   display: flex;
-  font-family: "Kanit" , sans-serif;
+  font-family: "Kanit", sans-serif;
   flex-direction: column;
   align-items: center; /* Center horizontally */
   justify-content: center; /* Center vertically */
   text-align: center; /* Center text within the container */
-  background-color: #FAF0E6;
+  background-color: #faf0e6;
   min-height: 100vh;
   padding-bottom: 500px;
 }
 
 .copy-message {
-  font-weight:400;
+  font-weight: 400;
   margin-bottom: 10px;
 }
 
@@ -436,7 +434,7 @@
   margin-top: 10px;
 }
 #back-btn {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   display: flex;
   align-items: center; /* Vertically align content */
   font-size: 20px;
@@ -456,18 +454,14 @@
   text-decoration: none; /* To remove underline on hover */
 }
 
-
-
-
 /* End of Wait */
 
 /* Start of InputForm */
 .input-container {
   font-family: "Kanit", sans-serif;
   display: flex;
-
 }
-.seldiff h1{
+.seldiff h1 {
   font-family: "Kanit", sans-serif;
   font-weight: 800;
   margin-bottom: 20px;
@@ -493,14 +487,13 @@
   border-radius: 10px;
   padding: 20px;
   margin: 0 auto;
-  background-color: #FFF8D6;
+  background-color: #fff8d6;
   text-align: center;
   font-size: 16px;
 }
 .easy,
 .med,
-.hard
-{
+.hard {
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -511,13 +504,12 @@
 }
 
 .easy {
-  background-color: #EDD7B3;
-  color: #BB1F1F;
-
+  background-color: #edd7b3;
+  color: #bb1f1f;
 }
 
 .easy .btn {
-  color: #BB1F1F;
+  color: #bb1f1f;
   width: 300px;
   height: 70px;
   display: flex;
@@ -528,11 +520,11 @@
 }
 
 .med {
-  background-color: #C08261;
-  color:black;
+  background-color: #c08261;
+  color: black;
 }
 .med .btn {
-  color:black;
+  color: black;
   width: 300px;
   height: 70px;
   display: flex;
@@ -542,11 +534,11 @@
   font-size: 32px;
 }
 .hard {
-  background-color: #9A3B3B;
-  color:#FFF8D6;
+  background-color: #9a3b3b;
+  color: #fff8d6;
 }
 .hard .btn {
-  color:#FFF8D6;
+  color: #fff8d6;
   width: 300px;
   height: 70px;
   display: flex;
@@ -558,14 +550,13 @@
 
 /* YourComponent.css */
 
-
 .input-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-color: #FAF0E6;
+  background-color: #faf0e6;
   padding-bottom: 500px;
 }
 
@@ -591,7 +582,7 @@
   margin-top: 20px;
 }
 .backbtn {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   color: black;
   border-radius: 5px;
   width: 300px;
@@ -600,24 +591,22 @@
 }
 
 .backbtn .btn {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   color: black;
   width: 300px;
   font-weight: bold;
   font-size: 25px;
-
 }
 
 .joinbtn {
-  background-color: #FFD9C0;
+  background-color: #ffd9c0;
   color: black;
   border-radius: 5px;
   width: 300px;
   height: 50px;
-
 }
 .joinbtn .btn {
-  background-color: #FFD9C0;
+  background-color: #ffd9c0;
   color: black;
   width: 300px;
   font-weight: bold;
@@ -628,18 +617,17 @@
   font-size: 36px; /* Adjust the font size as needed */
   text-align: center; /* Center align the title */
   margin-bottom: 20px; /* Add spacing below the title */
-  color: #D4492A;
+  color: #d4492a;
   font-weight: 800;
   text-shadow: 1px 1px 1px gray;
 }
-
 
 /* End of InputForm */
 
 /* Start of Choice Start New Join Game */
 .choice-container {
   display: flex;
-  background-color: #FFF6E9;
+  background-color: #fff6e9;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -658,12 +646,11 @@
   color: #8c8c8c;
   width: 250px;
   font-size: 20px;
-
 }
 
 .startnew {
-  background-color:white;
-  color:#8c8c8c;
+  background-color: white;
+  color: #8c8c8c;
   border: 2px solid whitesmoke;
   border-radius: 10px;
   width: 250px;
@@ -671,8 +658,8 @@
 }
 
 .joingame {
-  background-color:white;
-  color:#8c8c8c;
+  background-color: white;
+  color: #8c8c8c;
   border: 2px solid whitesmoke;
   border-radius: 10px;
   width: 250px;
@@ -693,14 +680,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #FFF6E9;
+  background-color: #fff6e9;
   padding: 10px; /* Add padding to create spacing around the content */
   font-family: "Kanit", "san-serif";
 }
 
-.maintitle h1{
+.maintitle h1 {
   margin-bottom: 5px; /* Add margin at the bottom of the title */
-  color:#D4492A;
+  color: #d4492a;
   font-weight: 700;
   text-shadow: 1px 1px 1px gray;
 }
@@ -715,17 +702,17 @@
   font-weight: bold;
 }
 #avatar-btn {
-  background-color: #B5CB99;
+  background-color: #b5cb99;
   color: black;
 }
 #leaderboard-btn {
-  background-color: #186F65;
-
+  background-color: #186f65;
 }
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
-  background-color: #FFF6E9; 
+  background-color: #fff6e9;
 }
 .theme-container {
   display: flex;
@@ -734,12 +721,13 @@ body, html {
   text-align: center;
   margin: 10px; /* Add margin for spacing */
 }
-.theme h2{
-  color:#8c8c8c;
+.theme h2 {
+  color: #8c8c8c;
   font-size: 20px;
   margin-bottom: 5px;
 }
- #day-btn, #night-btn {
+#day-btn,
+#night-btn {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -748,39 +736,61 @@ body, html {
   border: none;
   width: 100px;
   height: 40px; /* Increased height for better alignment */
-  background-color: #FFD9C0;
+  background-color: #ffd9c0;
   margin-top: 10px; /* Add space between each pair */
   color: black;
   font-size: 20px;
   font-weight: bold;
 }
 
-
 #day-btn {
-  margin-top:5px;
+  margin-top: 5px;
 }
 .daynight {
   display: flex;
   justify-content: center; /* Center horizontally */
 }
 
-
 /* start of game page */
 
-#default-background-color-font{
-  background-color: #FFF6E9;
-  font-family: "Kanit" , sans-serif;
+#default-background-color-font {
+  background-color: #fff6e9;
+  font-family: "Kanit", sans-serif;
 }
 
-.in-line-grid{
+.in-line-grid {
   display: flex;
 }
 
-.findmymines-text{
-  font-family: "Kanit" , sans-serif;
+.findmymines-text {
+  font-family: "Kanit", sans-serif;
   font-size: 70px;
-  color: #D4492A;
+  color: #d4492a;
   font-weight: bold;
 }
 
+/* result modal css */
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
 
+  background-color: white;
+  padding: 6rem;
+  border-radius: 50px; /* Use a large value for a rounded effect */
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
+}
