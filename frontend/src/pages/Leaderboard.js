@@ -3,7 +3,8 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 
-export const Leaderboard = () => {
+export const Leaderboard = ({ nightTheme }) => {
+  const [difficulty, setDifficulty] = useState("easy");
   const [leaderboards, setLeaderboards] = useState([]);
 
   useEffect(() => {
@@ -11,7 +12,7 @@ export const Leaderboard = () => {
       try {
         const response = await axios.get(
           "http://localhost:9000/score/leaderboards",
-          { params: { difficulty: "medium" } },
+          { params: { difficulty } },
           { crossdomain: true }
         );
         setLeaderboards(response.data.leaderboards);
@@ -21,12 +22,17 @@ export const Leaderboard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [difficulty]);
+
+  const handleDifficultyChange = (newDifficulty) => {
+    setDifficulty(newDifficulty); // Update difficulty when a difficulty button is clicked
+  };
 
   return (
-    <div className="max-w-4xl mx-auto bg-gray-200 p-4 container">
+    // <div className="max-w-4xl mx-auto bg-red-500 p-4 container">
+    <div className={`container${nightTheme ? '-night' : ''}`}>
       <Link to="/">
-        <button className="exit">
+        <button className={`exit${nightTheme ? '-night' : ''}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="70"
@@ -39,13 +45,46 @@ export const Leaderboard = () => {
             />
           </svg>
         </button>
+        <div className={`diff-btn${nightTheme ? '-night' : ''}`}>
+          <button
+            className={`py-2 px-4 rounded mx-2 ${
+              difficulty === "easy" ? "bg-primary" : ""
+            }`}
+            onClick={(e) => {
+              e.preventDefault();
+              handleDifficultyChange("easy");
+            }}
+          >
+            EASY
+          </button>
+          <button
+            className={`py-2 px-4 rounded mx-2 ${
+              difficulty === "medium" ? "bg-primary" : ""
+            }`}
+            onClick={(e) => {
+              e.preventDefault();
+              handleDifficultyChange("medium");
+            }}
+          >
+            MEDIUM
+          </button>
+          <button
+            className={`py-2 px-4 rounded mx-2 ${
+              difficulty === "hard" ? "bg-primary" : ""
+            }`}
+            onClick={(e) => {
+              e.preventDefault();
+              handleDifficultyChange("hard");
+            }}
+          >
+            HARD
+          </button>
+        </div>
       </Link>
       <div className="back">
         <div className="front">
           <div className="top">
-            <h1 className="text-3xl font-bold mb-4 text-center text">
-              LEADERBOARD
-            </h1>
+            <h1 className="text">LEADERBOARD</h1>
             <div className="trophies">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -74,14 +113,17 @@ export const Leaderboard = () => {
                         >
                           <g transform="rotate(180 256 256)">
                             <path
-                              fill="#ff6d60"
+                              fill="#FF6D60"
                               d="M394 480a16 16 0 0 1-9.39-3L256 383.76L127.39 477a16 16 0 0 1-24.55-18.08L153 310.35L23 221.2a16 16 0 0 1 9-29.2h160.38l48.4-148.95a16 16 0 0 1 30.44 0l48.4 149H480a16 16 0 0 1 9.05 29.2L359 310.35l50.13 148.53A16 16 0 0 1 394 480Z"
                             />
                           </g>
                         </svg>
                       </div>
                     )}
-                    <h2 className="text-xl font-bold mb-2 player">
+                    {index < 3 && (
+                      <div className="star-number">{index + 1}</div>
+                    )}
+                    <h2 className="player">
                       {player.name} #{index + 1}
                     </h2>
                     <p className="mb-1 score">

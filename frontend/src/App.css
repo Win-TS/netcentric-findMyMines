@@ -119,9 +119,22 @@
 
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 120px;
+  background-color: #fff6e9;
+  width: 100%;
+  height: 100%;
+}
+
+.container-night {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #1F1D36;
+  width: 100%;
+  height: 100%;
 }
 
 /* Avatar.css */
@@ -132,7 +145,17 @@
   padding: 10px; /* Adjust as needed to add space around the button */
   cursor: pointer; /* Add a cursor style to indicate it's clickable */
   border: none;
-  background-color: white;
+  background-color: #fff6e9;
+}
+
+.exit-night {
+  position: absolute;
+  top: 0; /* Position at the top of the container */
+  right: 0; /* Position at the right of the container */
+  padding: 10px; /* Adjust as needed to add space around the button */
+  cursor: pointer; /* Add a cursor style to indicate it's clickable */
+  border: none;
+  background-color: #1F1D36;
 }
 
 /* If you want to change the button color */
@@ -150,11 +173,37 @@
   height: 700px; /* Set a minimum height of the viewport height */
   width: 600px; /* Set a minimum width of the viewport width */
   border-radius: 10%; /* Adds rounded corners with a 10% border radius */
+  right: 25px;
+  top: 100px;
+}
+
+.back-night {
+  background-color: #764886; /* Sets the background color to green */
+  position: relative; /* This is fine if the element is part of a larger layout */
+  display: flex; /* Enable flex properties for centering */
+  align-items: center; /* Centers content vertically within the element */
+  justify-content: center; /* Centers content horizontally within the element */
+  height: 700px; /* Set a minimum height of the viewport height */
+  width: 600px; /* Set a minimum width of the viewport width */
+  border-radius: 10%; /* Adds rounded corners with a 10% border radius */
+  right: 25px;
+  top: 100px;
 }
 
 .front {
   position: absolute;
   background-color: #a4d0a4;
+  width: 600px;
+  height: 700px;
+  left: 50px;
+  bottom: 50px;
+  border-radius: 10%;
+  padding-bottom: 100px;
+}
+
+.front-night {
+  position: absolute;
+  background-color: #c9d3f5;
   width: 600px;
   height: 700px;
   left: 50px;
@@ -175,7 +224,27 @@
   border-radius: 20px;
 }
 
+.top-night {
+  position: absolute;
+  background-color: #d9d9d9;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  height: 100px;
+  left: 100px;
+  bottom: 625px;
+  border-radius: 20px;
+}
+
 .text {
+  font-size: 45px;
+  text-align: center; /* Horizontally centers the text within the h1 element */
+  line-height: 2; /* Vertically centers the text within the h1 element */
+  font-family: "Kanit", sans-serif;
+  font-weight: 800;
+}
+
+.text-night {
   font-size: 45px;
   text-align: center; /* Horizontally centers the text within the h1 element */
   line-height: 2; /* Vertically centers the text within the h1 element */
@@ -194,15 +263,55 @@
   margin-top: 5px;
 }
 
+.grid-night {
+  position: relative;
+  max-height: 450px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enable vertical scrolling when content overflows */
+  border: 1px solid #ccc; /* Optional: Add a border to visualize the container */
+  border-radius: 5px; /* Optional: Add rounded corners */
+  padding: 5px; /* Optional: Add padding for spacing */
+  background-color: #FFD2D7;
+  margin-top: 5px;
+}
+
 .star {
   position: absolute;
+}
+
+.star-number {
+  position: absolute;
+  padding-left: 35px;
+  padding-top: 16px;
+  font-size: 25px;
+  color: #f7d060;
+}
+
+.star-night {
+  position: absolute;
+}
+
+.star-number-night {
+  position: absolute;
+  padding-left: 35px;
+  padding-top: 16px;
+  font-size: 25px;
+  color: #f7d060;
 }
 
 .trophies {
   display: block;
 }
+
+.trophies-night {
+  display: block;
+}
+
 .arrow {
   display: block;
+}
+
+.arrow-night {
+  display:block;
 }
 
 .player-box {
@@ -224,6 +333,13 @@
 
 .top-ranking {
   display: flex;
+}
+
+.diff-btn {
+  float: left;
+  top: 10px;
+  font-size: 30px;
+  font-family: "Kanit", "sans-serif";
 }
 
 /* End of Leaderboard */
@@ -370,9 +486,42 @@
   align-items: center;
 }
 
+.selected-avatar {
+  position: relative; /* Add relative positioning for pseudo-elements */
+  padding: 6px; /* Increase the padding for a larger border */
+}
+
+.selected-avatar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 10px solid transparent; /* Border width for the highlighting effect */
+  border-image: linear-gradient(135deg, #ff5733, #00aaff) 1;
+  border-image-slice: 1;
+  transition: border 0.2s ease; /* Add a transition for the border property */
+}
+
+.selected-avatar:hover::before {
+  border-image: linear-gradient(135deg, #00aaff, #ff5733) 1;
+}
+
 /* Center the main menu button */
 #mainmenu-btn {
   margin-top: 20px;
+}
+
+.avatarpg-btn {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-confirm {
+  background-color: #8c8c8c;
 }
 
 /* End of Avatar */
@@ -388,6 +537,7 @@
   text-align: center; /* Center text within the container */
   background-color: #faf0e6;
   min-height: 100vh;
+  width: 100%;
   padding-bottom: 500px;
 }
 
@@ -755,6 +905,8 @@ html {
 
 #default-background-color-font {
   background-color: #fff6e9;
+  min-height: 100vh;
+  min-width: 100vw;
   font-family: "Kanit", sans-serif;
 }
 
@@ -798,4 +950,34 @@ html {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(3px);
   z-index: 5;
+}
+
+#you-win {
+  font-size: 50px;
+  color: #3b9830;
+  font-family: "Kanit", sans-serif;
+  font-weight: bold;
+}
+
+#you-lose {
+  font-size: 50px;
+  color: #bb1f1f;
+  font-family: "Kanit", sans-serif;
+  font-weight: bold;
+}
+
+.result-modal-text {
+  font-size: 50px;
+  color: #d4492a;
+  font-family: "Kanit", sans-serif;
+  font-weight: bold;
+}
+
+.restart-btn {
+  font-size: 30px;
+  border-radius: 4px;
+  background-color: #ffd9c0;
+  color: black;
+  border: 2px solid #ffd9c0; /* Green */
+  padding: 2px 5px;
 }

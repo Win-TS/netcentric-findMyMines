@@ -8,6 +8,7 @@ const BlockElement = (props) => {
   const [bombSound] = useState(new Audio(bombsound));
   useEffect(() => {
     if (props.revealed && (props.mine === 1 || props.mine === 2)) {
+      bombSound.volume = 0.2;
       bombSound.play().catch((error) => {
         console.error("Error playing audio:", error);
       });

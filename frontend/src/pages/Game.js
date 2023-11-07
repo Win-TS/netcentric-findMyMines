@@ -16,7 +16,7 @@ import axios from "axios";
 const ENDPOINT = "http://localhost:9000/";
 const socket = io.connect(ENDPOINT);
 
-const Game = ({nightTheme}) => {
+const Game = ({ nightTheme }) => {
   const [playerName, setPlayerName] = useState("");
   const [minefield, setMinefield] = useState(null);
   const [size, setSize] = useState(0);
@@ -70,11 +70,9 @@ const Game = ({nightTheme}) => {
     currentOpponentPlayer[1] = scoreArray[playerIndex === 0 ? 1 : 0];
     setOpponentPlayer(currentOpponentPlayer);
     setEnd(true);
-    await axios.post("http://localhost:9000/score/new-score", {
-      name: playerName,
-      score: currentOpponentPlayer,
-      difficulty: difficulty,
-    });
+    await axios.post(
+      `http://localhost:9000/score/new-score?name=${playerName}&score=${currentPlayerScore}&difficulty=${difficulty}`
+    );
   };
 
   const handleRestartButton = () => {
@@ -214,14 +212,24 @@ const Game = ({nightTheme}) => {
     }
     return (
       <>
-        <div className={`findmymines-text${nightTheme ? '-night' : ''}`}>FINDMYMINES</div>
+        <div className={`findmymines-text${nightTheme ? "-night" : ""}`}>
+          FINDMYMINES
+        </div>
         <StartModal start={start} setStart={setStart} />
         <Wait display={waiting} room={room} nightTheme={nightTheme} />
         <Status message={statusMessage} nightTheme={nightTheme} />
-        <CountdownTimer isActive={timer} onTimeout={handleTimeout} nightTheme={nightTheme} />
-        <div className={`in-line-grid${nightTheme ? '-night' : ''}`}>
+        <CountdownTimer
+          isActive={timer}
+          onTimeout={handleTimeout}
+          nightTheme={nightTheme}
+        />
+        <div className={`in-line-grid${nightTheme ? "-night" : ""}`}>
           <div>
-            <Scoreboard player={playerName} playerScore={currentPlayerScore} nightTheme={nightTheme} />
+            <Scoreboard
+              player={playerName}
+              playerScore={currentPlayerScore}
+              nightTheme={nightTheme}
+            />
             <ShowAvatar avatar={selectedAvatar} />
           </div>
 

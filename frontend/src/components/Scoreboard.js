@@ -1,9 +1,9 @@
 import React from "react";
 
-const Scoreboard = ({ player, playerScore, opponent, opponentScore, nightTheme }) => {
+const Scoreboard = ({ player, playerScore, nightTheme }) => {
   return (
-    <div className="scoreboard">
-      <div className="scoreboard-player">
+    <div className={`scoreboard${nightTheme ? '-night' : ''}`}>
+      <div className={`scoreboard-player${nightTheme ? '-night' : ''}`}>
         <h1>{player}</h1>
         <h3>{playerScore}</h3>
       </div>

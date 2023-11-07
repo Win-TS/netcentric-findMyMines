@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import OnlineClients from "./components/OnlineClients";
 import MainMenu from "./pages/MainMenu";
 import Game from "./pages/Game";
 import { Leaderboard } from "./pages/Leaderboard";
@@ -11,6 +10,7 @@ import { useState } from "react";
 
 function App() {
   const [audio] = useState(new Audio(backgroundMusic));
+  const [isMuted, setIsMuted] = useState(false);
   const [nightTheme, setNightTheme] = useState(false);
 
   const playAudio = () => {
@@ -19,6 +19,11 @@ function App() {
     audio.play().catch((error) => {
       console.error("Autoplay failed:", error.message);
     });
+  };
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+    audio.muted = !audio.muted;
   };
 
   const handleDayThemeClick = () => {
@@ -31,9 +36,8 @@ function App() {
 
   return (
     <div className="App" id={`default-background-color-font${nightTheme ? '-night' : ''}`}>
-      <button onClick={playAudio}>Play Background Music</button>
       <Router>
-        <OnlineClients />
+      <button onClick={toggleMute}>{isMuted ? "Unmute" : "Mute"}</button>
         <Routes>
           <Route
             path="/"
@@ -41,6 +45,7 @@ function App() {
               <MainMenu
                 changeDayTheme={handleDayThemeClick}
                 changeNightTheme={handleNightThemeClick}
+                playBgm={playAudio}
                 nightTheme={nightTheme}
               />
             }

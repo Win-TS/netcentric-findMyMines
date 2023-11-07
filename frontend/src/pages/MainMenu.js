@@ -287,7 +287,7 @@ class MainMenu extends Component {
                     </button>
                   </div>
                 </div>
-                <Choice onChoice={this.onChoice} nightTheme={this.props.nightTheme} />
+                <Choice onChoice={this.onChoice} nightTheme={this.props.nightTheme} playBgm={this.props.playBgm} />
                 <Link to="/avatar">
                   <button
                     className="btn btn-primary btn-lg btn-block"

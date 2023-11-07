@@ -1,17 +1,17 @@
 import React from "react";
 import ChoiceButton from "./ChoiceButton";
 
-const Choice = ({ logo, onChoice, nightTheme }) => {
+const Choice = ({ onChoice, nightTheme, playBgm }) => {
   return (
     <>
       <div className={`choice-container${nightTheme ? '-night' : ''}`}>
-        {/* <a href="/"><img src={logo} alt='FindMyMines'/></a> */}
         <div className={`startnew${nightTheme ? '-night' : ''}`}>
           <ChoiceButton
             onChoice={onChoice}
             type="primary"
             choice="new"
             label="Start New Game"
+            playBgm={playBgm}
           />
         </div>
         <div className={`joingame${nightTheme ? '-night' : ''}`}>
@@ -20,6 +20,7 @@ const Choice = ({ logo, onChoice, nightTheme }) => {
             type="secondary"
             choice="join"
             label="Join Game"
+            playBgm={playBgm}
           />
         </div>
       </div>

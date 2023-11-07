@@ -2,6 +2,7 @@ const scoreModel = require("../models/newScore");
 
 exports.postNewScore = async (req, res) => {
   try {
+    console.log(req.query);
     const newScore = await scoreModel.create({
       name: req.query.name,
       score: req.query.score,
