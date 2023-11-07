@@ -1,5 +1,4 @@
-import axios from "axios";
-const ResultModal = ({ score, opponentScore, end, restart }) => {
+const ResultModal = ({ score, opponentScore, end, restart, nightTheme }) => {
   const modalStyle = {
     display: end ? "block" : "none",
     position: "fixed",
@@ -15,7 +14,7 @@ const ResultModal = ({ score, opponentScore, end, restart }) => {
   if (end) {
     return (
       <div>
-        <div class="overlay"></div>
+        <div className="overlay"></div>
         <div style={modalStyle}>
           {score > opponentScore ? (
             <>

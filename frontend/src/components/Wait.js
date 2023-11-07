@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 
-const Wait = ({ room, display }) => {
+const Wait = ({ room, display, nightTheme }) => {
   const textArea = useRef(null);
   const onClick = () => {
     textArea.current.select();
@@ -9,14 +9,14 @@ const Wait = ({ room, display }) => {
   };
 
   return (
-    <div className="wait" style={{ display: display ? "flex" : "none" }}>
-      <div className="copy">
-        <h1 className="copy-message">
+    <div className={`wait${nightTheme ? '-night' : ''}`} style={{ display: display ? "flex" : "none" }}>
+      <div className={`copy${nightTheme ? '-night' : ''}`}>
+        <h1 className={`copy-message${nightTheme ? '-night' : ''}`}>
           Give your friend the following room id to connect
         </h1>
-        <div className="copy-container">
-          <div className="copy-box">
-            <div className="room-id-box">
+        <div className={`copy-container${nightTheme ? '-night' : ''}`}>
+          <div className={`copy-box${nightTheme ? '-night' : ''}`}>
+            <div className={`room-id-box${nightTheme ? '-night' : ''}`}>
               <label htmlFor="room" className="room-label">
                 Room ID
               </label>
@@ -24,10 +24,10 @@ const Wait = ({ room, display }) => {
                 ref={textArea}
                 readOnly={true}
                 value={room}
-                className="copy-area"
+                className={`copy-area${nightTheme ? '-night' : ''}`}
               />
             </div>
-            <button className="copy-button" onClick={onClick}>
+            <button className={`copy-button${nightTheme ? '-night' : ''}`} onClick={onClick}>
               Copy
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@ const Wait = ({ room, display }) => {
           </div>
           <h1 className="wait-message">Waiting for player to connect...</h1>
         </div>
-        <Link to="/" className="back-button">
+        <Link to="/" className={`back-button${nightTheme ? '-night' : ''}`}>
           <button className="btn btn-lg btn-block" id="back-btn">
             <div className="backarrow">
               <svg

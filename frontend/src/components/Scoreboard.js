@@ -1,6 +1,6 @@
 import React from "react";
 
-const Scoreboard = ({ player, playerScore, opponent, opponentScore }) => {
+const Scoreboard = ({ player, playerScore, opponent, opponentScore, nightTheme }) => {
   return (
     <div className="scoreboard">
       <div className="scoreboard-player">

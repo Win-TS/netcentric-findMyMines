@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const CountdownTimer = ({ isActive, onTimeout }) => {
+const CountdownTimer = ({ isActive, onTimeout, nightTheme }) => {
   const [timer, setTimer] = useState(10);
   const hasTimedOut = useRef(false);
 

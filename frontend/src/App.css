@@ -758,6 +758,11 @@ html {
   font-family: "Kanit", sans-serif;
 }
 
+#default-background-color-font-night {
+  background-color: blueviolet;
+  font-family: "Kanit", sans-serif;
+}
+
 .in-line-grid {
   display: flex;
 }

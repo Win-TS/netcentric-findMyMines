@@ -16,7 +16,7 @@ import axios from "axios";
 const ENDPOINT = "http://localhost:9000/";
 const socket = io.connect(ENDPOINT);
 
-const Game = () => {
+const Game = ({nightTheme}) => {
   const [playerName, setPlayerName] = useState("");
   const [minefield, setMinefield] = useState(null);
   const [size, setSize] = useState(0);
@@ -214,14 +214,14 @@ const Game = () => {
     }
     return (
       <>
-        <div className="findmymines-text">FINDMYMINES</div>
+        <div className={`findmymines-text${nightTheme ? '-night' : ''}`}>FINDMYMINES</div>
         <StartModal start={start} setStart={setStart} />
-        <Wait display={waiting} room={room} />
-        <Status message={statusMessage} />
-        <CountdownTimer isActive={timer} onTimeout={handleTimeout} />
-        <div className="in-line-grid">
+        <Wait display={waiting} room={room} nightTheme={nightTheme} />
+        <Status message={statusMessage} nightTheme={nightTheme} />
+        <CountdownTimer isActive={timer} onTimeout={handleTimeout} nightTheme={nightTheme} />
+        <div className={`in-line-grid${nightTheme ? '-night' : ''}`}>
           <div>
-            <Scoreboard player={playerName} playerScore={currentPlayerScore} />
+            <Scoreboard player={playerName} playerScore={currentPlayerScore} nightTheme={nightTheme} />
             <ShowAvatar avatar={selectedAvatar} />
           </div>
 
@@ -236,6 +236,7 @@ const Game = () => {
         </div>
         <ResultModal
           score={currentPlayerScore}
+          nightTheme={nightTheme}
           opponentScore={opponentPlayer[1]}
           end={end}
           restart={handleRestartButton}

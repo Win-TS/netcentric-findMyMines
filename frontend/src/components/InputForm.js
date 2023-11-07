@@ -3,22 +3,22 @@ import Input from "./Input";
 import ChoiceButton from "./ChoiceButton";
 
 const InputForm = (props) => {
-  const { stepBack, onSubmit, onTyping, setDifficulty, newGame, name, room } =
+  const { stepBack, onSubmit, onTyping, setDifficulty, newGame, name, room, nightTheme } =
     props;
 
   if (newGame) {
     return (
-      <div className="input-container">
-        <div className = "name-box">
+      <div className={`input-container${nightTheme ? '-night' : ''}`}>
+        <div className = {`name-box${nightTheme ? '-night' : ''}`}>
         <Input
           name="name"
           placeholder="Type you name"
           onChange={onTyping}
           value={name}
         /></div>
-        <div className = "seldiff"><h1>Select Difficulty</h1></div>
-        <div className="difficulty-buttons">
-          <div className="easy">
+        <div className = {`seldiff${nightTheme ? '-night' : ''}`}><h1>Select Difficulty</h1></div>
+        <div className={`difficulty-buttons${nightTheme ? '-night' : ''}`}>
+          <div className={`easy${nightTheme ? '-night' : ''}`}>
           <ChoiceButton
             type="easy"
             choice="easy"
@@ -26,14 +26,14 @@ const InputForm = (props) => {
             label="Easy"
             className="easy1"
           /></div>
-          <div className="med">
+          <div className={`med${nightTheme ? '-night' : ''}`}>
           <ChoiceButton
             type="medium"
             choice="medium"
             onChoice={setDifficulty}
             label="Medium"
           /></div>
-          <div className="hard">
+          <div className={`hard${nightTheme ? '-night' : ''}`}>
           <ChoiceButton
             type="hard"
             choice="hard"
@@ -41,7 +41,7 @@ const InputForm = (props) => {
             label="Hard"
           /></div>
         </div>
-        <div className="nav-container">
+        <div className={`nav-container${nightTheme ? '-night' : ''}`}>
           <ChoiceButton
             type="nav-back"
             choice="back"
@@ -59,7 +59,7 @@ const InputForm = (props) => {
     );
   } else {
     return (
-      <div className="input-container">
+      <div className={`input-container${nightTheme ? '-night' : ''}`}>
         <div className="title">FINDMYMINES</div>
         <div className="namebox">
           <Input
@@ -69,7 +69,7 @@ const InputForm = (props) => {
             value={name}
           />
         </div>
-        <div className="roombox">
+        <div className={`roombox${nightTheme ? '-night' : ''}`}>
           <Input
             name="room"
             placeholder="Room ID..."
@@ -77,8 +77,8 @@ const InputForm = (props) => {
             value={room}
           />
         </div>
-        <div className="nav-container">
-          <div className="backbtn">
+        <div className={`nav-container${nightTheme ? '-night' : ''}`}>
+          <div className={`backbtn${nightTheme ? '-night' : ''}`}>
             <ChoiceButton
               type="nav-back"
               choice="back"
@@ -86,7 +86,7 @@ const InputForm = (props) => {
               label="Back"
             />
           </div>
-          <div className="joinbtn">
+          <div className={`joinbtn${nightTheme ? '-night' : ''}`}>
             <ChoiceButton
               type="nav-forward"
               choice="submit"
