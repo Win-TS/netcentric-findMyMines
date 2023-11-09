@@ -2,6 +2,7 @@ const { randRoom, randFirstPlayer } = require("../utils/utils");
 const Player = require("../utils/player");
 const Grid = require("../utils/grid");
 
+let online = 0;
 const activeRooms = new Map();
 const activePlayers = [];
 const roomArray = [];
@@ -69,7 +70,8 @@ const getRoomPlayersNum = (room) => {
 
 exports.initializeSocket = (io) => {
   io.on("connection", (socket) => {
-    io.emit("onlineClients", io.engine.clientsCount);
+    online++;
+    io.emit("onlineClients", online);
 
     socket.on("newGame", ({ difficulty }) => {
       let room = makeRoom(difficulty);
@@ -214,6 +216,10 @@ exports.initializeSocket = (io) => {
           }
           if (currentRoom.players.length === 0) {
             activeRooms.delete(room);
+            const roomIndex = roomArray.indexOf(room);
+            if (roomIndex !== -1) {
+              roomArray.splice(roomIndex, 1);
+            }
           } else {
             io.to(room).emit("roomUpdated", currentRoom);
             io.to(room).emit("waiting");
@@ -224,7 +230,8 @@ exports.initializeSocket = (io) => {
       if (playerIndex !== -1) {
         activePlayers.splice(playerIndex, 1);
       }
-      // io.emit("onlineClients", io.engine.clientsCount);
+      online--;
+      io.emit("onlineClients", online);
     });
   });
 

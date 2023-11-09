@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 
-import OnlineClients from "../components/OnlineClients"
-
-const ENDPOINT = "http://localhost:9000/";
+const ENDPOINT = process.env.REACT_APP_IP_BACK || "http://localhost:9000/";
 const socket = io.connect(ENDPOINT);
 
 const Admin = () => {
+    const [onlineClients, setOnlineClients] = useState(0);
+
+    useEffect(() => {
+        socket.on("onlineClients", (count) => {
+          setOnlineClients(count);
+        });
+    
+        return () => {
+          socket.off("onlineClients");
+        };
+      }, [onlineClients]);
+
     const handleReset = () => {
         return socket.emit('clearRooms');
     }
@@ -15,7 +25,7 @@ const Admin = () => {
         <>
         <div>
             <h1>Admin Page</h1>
-            <OnlineClients />
+            <h3>Online Clients: {onlineClients}</h3>
             <button onClick={handleReset}>Reset All Rooms</button>
         </div>
         </>

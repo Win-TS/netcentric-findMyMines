@@ -8,7 +8,7 @@ import Error from "../components/Error";
 
 import qs from "qs";
 import io from "socket.io-client";
-const ENDPOINT = "http://localhost:9000/";
+const ENDPOINT = process.env.REACT_APP_IP_BACK || "http://localhost:9000/";
 
 class MainMenu extends Component {
   constructor(props) {

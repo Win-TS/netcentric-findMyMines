@@ -7,6 +7,7 @@ import Avatar from "./pages/Avatar";
 import Admin from "./pages/Admin";
 import backgroundMusic from "./assets/bgm.m4a";
 import { useState } from "react";
+import HowToPlay from "./pages/HowToPlay";
 
 function App() {
   const [audio] = useState(new Audio(backgroundMusic));
@@ -35,9 +36,12 @@ function App() {
   };
 
   return (
-    <div className="App" id={`default-background-color-font${nightTheme ? '-night' : ''}`}>
+    <div
+      className="App"
+      id={`default-background-color-font${nightTheme ? "-night" : ""}`}
+    >
       <Router>
-      <button onClick={toggleMute}>{isMuted ? "Unmute" : "Mute"}</button>
+        <button onClick={toggleMute}>{isMuted ? "Unmute" : "Mute"}</button>
         <Routes>
           <Route
             path="/"
@@ -56,6 +60,7 @@ function App() {
             element={<Leaderboard nightTheme={nightTheme} />}
           />
           <Route path="/avatar" element={<Avatar nightTheme={nightTheme} />} />
+          <Route path="/howtoplay" element={<HowToPlay />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<h1> You are in the wrong path </h1>} />
         </Routes>

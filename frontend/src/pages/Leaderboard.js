@@ -11,7 +11,7 @@ export const Leaderboard = ({ nightTheme }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:9000/score/leaderboards",
+          `${process.env.REACT_APP_IP_BACK || "http://localhost:9000"}/score/leaderboards`,
           { params: { difficulty } },
           { crossdomain: true }
         );
@@ -25,11 +25,10 @@ export const Leaderboard = ({ nightTheme }) => {
   }, [difficulty]);
 
   const handleDifficultyChange = (newDifficulty) => {
-    setDifficulty(newDifficulty); // Update difficulty when a difficulty button is clicked
+    setDifficulty(newDifficulty);
   };
 
   return (
-    // <div className="max-w-4xl mx-auto bg-red-500 p-4 container">
     <div className={`container${nightTheme ? '-night' : ''}`}>
       <Link to="/">
         <button className={`exit${nightTheme ? '-night' : ''}`}>
@@ -103,7 +102,7 @@ export const Leaderboard = ({ nightTheme }) => {
                     key={player._id}
                     className="bg-white shadow-md rounded p-1 player-box"
                   >
-                    {index < 3 && ( // Check if rank is 1, 2, or 3
+                    {index < 3 && (
                       <div className="star">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

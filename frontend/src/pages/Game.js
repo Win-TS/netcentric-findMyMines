@@ -13,7 +13,7 @@ import StartModal from "../components/StartModal";
 import CountdownTimer from "../components/CountdownTimer";
 import axios from "axios";
 
-const ENDPOINT = "http://localhost:9000/";
+const ENDPOINT = process.env.REACT_APP_IP_BACK || "http://localhost:9000/";
 const socket = io.connect(ENDPOINT);
 
 const Game = ({ nightTheme }) => {
@@ -71,7 +71,7 @@ const Game = ({ nightTheme }) => {
     setOpponentPlayer(currentOpponentPlayer);
     setEnd(true);
     await axios.post(
-      `http://localhost:9000/score/new-score?name=${playerName}&score=${currentPlayerScore}&difficulty=${difficulty}`
+      `${ENDPOINT}/score/new-score?name=${playerName}&score=${currentPlayerScore}&difficulty=${difficulty}`
     );
   };
 
