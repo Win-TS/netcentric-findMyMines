@@ -53,8 +53,8 @@ const HowToPlay = ({nightTheme}) => {
             Restart button will be available, but the winner will start first!
           </li>
         </ul>
-        <li>Try to use strategic moves to win this game!</li>
       </ol>
+      <p>Hint: Try to use strategic moves to win this game!</p>
       <p className="good-luck-text">Enjoy the game and good luck!</p>
     </div>
   );
