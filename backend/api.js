@@ -18,7 +18,6 @@ const io = new Server(server, {
 });
 const port = process.env.PORT || 9000;
 
-const gameRouter = require("./routes/gameRoutes");
 const scoreRouter = require("./routes/scoreRoutes");
 const mainController = require("./controllers/main");
 const errorController = require("./controllers/errors");
@@ -38,7 +37,6 @@ mongoose
     console.error("MongoDB connection error:", err);
   });
 
-app.use("/game", gameRouter);
 app.use("/score", scoreRouter);
 
 app.get("*", errorController.get404);
