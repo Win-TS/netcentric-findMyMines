@@ -2,7 +2,7 @@
 
 .App {
   text-align: center;
-  cursor: url(./assets/cursor-fill.svg), auto
+  cursor: url(./assets/cursor-20-filled.svg), auto
 }
 
 .App-logo {
@@ -38,6 +38,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.muteButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 
 /* start of main menu */
@@ -1429,4 +1435,46 @@ html {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+/* how to play */
+.how-to-play {
+  font-size: 50px;
+  color: #d4492a;
+  font-family: "Kanit", sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+.how-to-play-container {
+  font-family: "Kanit", sans-serif;
+  width: 100%;
+  padding: 20px;
+  background-color: #ffd9c0;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.instructions-text {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.mine-images {
+  display: flex;
+  align-items: center;
+}
+
+.bomb-image,
+.golden-bomb-image {
+  margin: 0 10px;
+  width: 60px;
+  height: 60px;
+}
+
+.good-luck-text {
+  color: #186f65;
+  margin-top: 20px;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: bold;
 }

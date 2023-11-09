@@ -2,10 +2,12 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainMenu from "./pages/MainMenu";
 import Game from "./pages/Game";
-import { Leaderboard } from "./pages/Leaderboard";
+import Leaderboard from "./pages/Leaderboard";
 import Avatar from "./pages/Avatar";
 import Admin from "./pages/Admin";
 import backgroundMusic from "./assets/bgm.m4a";
+import volumeOn from "./assets/volume-up.svg";
+import volumeOff from "./assets/volume-off.svg";
 import { useState } from "react";
 import HowToPlay from "./pages/HowToPlay";
 
@@ -41,7 +43,14 @@ function App() {
       id={`default-background-color-font${nightTheme ? "-night" : ""}`}
     >
       <Router>
-        <button onClick={toggleMute}>{isMuted ? "Unmute" : "Mute"}</button>
+        <button onClick={toggleMute} className="muteButton">
+          {isMuted ? (
+            <img src={volumeOff} alt="Volume Off" />
+          ) : (
+            <img src={volumeOn} alt="Volume On" />
+          )}
+        </button>
+
         <Routes>
           <Route
             path="/"

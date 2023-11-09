@@ -304,6 +304,14 @@ class MainMenu extends Component {
                     LEADERBOARD
                   </button>
                 </Link>
+                <Link to="/howtoplay">
+                  <button
+                    className="btn btn-primary btn-lg btn-block"
+                    id={`avatar-btn${this.props.nightTheme ? '-night' : ''}`}
+                  >
+                    HOW TO PLAY
+                  </button>
+                </Link>
               </div>
             </>
           );
