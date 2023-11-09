@@ -43,11 +43,11 @@ function App() {
       id={`default-background-color-font${nightTheme ? "-night" : ""}`}
     >
       <Router>
-        <button onClick={toggleMute} className="muteButton">
+        <button onClick={toggleMute} className={`muteButton${nightTheme ? "-night" : ""}`}>
           {isMuted ? (
-            <img src={volumeOff} alt="Volume Off" />
+            <img src={volumeOff} alt="Volume Off" width="40px" height="40px" />
           ) : (
-            <img src={volumeOn} alt="Volume On" />
+            <img src={volumeOn} alt="Volume On" width="40px" height="40px"/>
           )}
         </button>
 
@@ -69,7 +69,7 @@ function App() {
             element={<Leaderboard nightTheme={nightTheme} />}
           />
           <Route path="/avatar" element={<Avatar nightTheme={nightTheme} />} />
-          <Route path="/howtoplay" element={<HowToPlay />} />
+          <Route path="/howtoplay" element={<HowToPlay nightTheme={nightTheme}/>} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<h1> You are in the wrong path </h1>} />
         </Routes>
