@@ -24,7 +24,7 @@ const BlockElement = (props) => {
       return <img src={crossImg} alt="cross" width="40px" height="40px" />;
     }
   }
-  return <p>Block</p>;
+  return <p></p>;
 };
 
 export default BlockElement;

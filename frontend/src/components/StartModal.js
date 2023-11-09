@@ -2,6 +2,18 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const StartModal = ({ start, setStart }) => {
+  const modalStyle = {
+    display: "block",
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "#D9D9D9",
+    padding: "20px",
+    zIndex: 1000,
+    textAlign: "center",
+    borderRadius: "10px",
+  };
   const [timer, setTimer] = useState(5);
   useEffect(() => {
     let countdownInterval;
@@ -22,7 +34,10 @@ const StartModal = ({ start, setStart }) => {
   if (start) {
     return (
       <div>
-        <h1>Start In: {timer}</h1>
+        <div class="overlay"></div>
+        <div style={modalStyle}>
+          <h1>Start In: {timer}</h1>
+        </div>
       </div>
     );
   }

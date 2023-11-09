@@ -11,6 +11,7 @@ import ResultModal from "../components/ResultModal";
 import ShowAvatar from "../components/ShowAvatar";
 import StartModal from "../components/StartModal";
 import CountdownTimer from "../components/CountdownTimer";
+import bombImg from "../assets/bomb.svg";
 import axios from "axios";
 
 const ENDPOINT = process.env.REACT_APP_IP_BACK || "http://localhost:9000/";
@@ -225,21 +226,24 @@ const Game = ({ nightTheme }) => {
         />
         <div className={`in-line-grid${nightTheme ? "-night" : ""}`}>
           <div>
-            <Scoreboard
-              player={playerName}
-              playerScore={currentPlayerScore}
-              nightTheme={nightTheme}
-            />
+            <Scoreboard player={playerName} nightTheme={nightTheme} />
             <ShowAvatar avatar={selectedAvatar} />
+            <div className="bombscore">
+              <img src={bombImg} width="75px" height="75px" alt="bomb" />
+              <Scoreboard playerScore={currentPlayerScore} />
+            </div>
           </div>
 
-          <div className={`grid-div-${size}`}>{gridArray}</div>
+          <div className={`grid-div-${size}${nightTheme ? "-night" : ""}`}>
+            {gridArray}
+          </div>
           <div>
-            <Scoreboard
-              player={opponentPlayer[0]}
-              playerScore={opponentPlayer[1]}
-            />
+            <Scoreboard player={opponentPlayer[0]} nightTheme={nightTheme} />
             <ShowAvatar avatar={opponentAvatar} />
+            <div className="bombscore">
+              <img src={bombImg} width="75px" height="75px" alt="bomb" />
+              <Scoreboard playerScore={opponentPlayer[1]} />
+            </div>
           </div>
         </div>
         <ResultModal

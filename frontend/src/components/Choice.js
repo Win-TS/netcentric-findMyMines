@@ -4,20 +4,20 @@ import ChoiceButton from "./ChoiceButton";
 const Choice = ({ onChoice, nightTheme, playBgm }) => {
   return (
     <>
-      <div className={`choice-container${nightTheme ? '-night' : ''}`}>
-        <div className={`startnew${nightTheme ? '-night' : ''}`}>
+      <div className={`choice-container${nightTheme ? "-night" : ""}`}>
+        <div className={`startnew${nightTheme ? "-night" : ""}`}>
           <ChoiceButton
             onChoice={onChoice}
-            type="primary"
+            type="none"
             choice="new"
             label="Start New Game"
             playBgm={playBgm}
           />
         </div>
-        <div className={`joingame${nightTheme ? '-night' : ''}`}>
+        <div className={`joingame${nightTheme ? "-night" : ""}`}>
           <ChoiceButton
             onChoice={onChoice}
-            type="secondary"
+            type="none"
             choice="join"
             label="Join Game"
             playBgm={playBgm}

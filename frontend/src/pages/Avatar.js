@@ -18,11 +18,11 @@ const Avatar = ({ nightTheme }) => {
   };
 
   return (
-    <div className={`avatar-selection-page${nightTheme ? '-night' : ''}`}>
-      <div className={`text${nightTheme ? '-night' : ''}`}>
+    <div className={`avatar-selection-page${nightTheme ? "-night" : ""}`}>
+      <div className={`text${nightTheme ? "-night" : ""}`}>
         <h1>Select your Avatar</h1>
       </div>
-      <div className={`avatar-grid${nightTheme ? '-night' : ''}`}>
+      <div className={`avatar-grid${nightTheme ? "-night" : ""}`}>
         <div
           className={`image ${
             selectedAvatar === "avatar1" ? "selected-avatar" : ""
@@ -112,11 +112,11 @@ const Avatar = ({ nightTheme }) => {
           />
         </div>
       </div>
-      <div className={`avatarpg-btn${nightTheme ? '-night' : ''}`}>
+      <div className={`avatarpg-btn${nightTheme ? "-night" : ""}`}>
         <Link to={`/?selectedAvatar=${selectedAvatar}`}>
           <button
             className="btn btn-primary btn-lg btn-block btn-confirm"
-            id="mainmenu-btn"
+            id={`mainmenu-btn${nightTheme ? "-night" : ""}`}
           >
             CONFIRM
           </button>
@@ -124,7 +124,7 @@ const Avatar = ({ nightTheme }) => {
         <Link to={"/"}>
           <button
             className="btn btn-primary btn-lg btn-block"
-            id="mainmenu-btn"
+            id={`mainmenu-btn${nightTheme ? "-night" : ""}`}
           >
             BACK
           </button>

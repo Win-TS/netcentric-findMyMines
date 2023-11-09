@@ -133,7 +133,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #1F1D36;
+  background-color: #bfbae1;
   width: 100%;
   height: 100%;
 }
@@ -156,7 +156,7 @@
   padding: 10px; /* Adjust as needed to add space around the button */
   cursor: pointer; /* Add a cursor style to indicate it's clickable */
   border: none;
-  background-color: #1F1D36;
+  background-color: #bfbae1;
 }
 
 /* If you want to change the button color */
@@ -171,11 +171,11 @@
   display: flex; /* Enable flex properties for centering */
   align-items: center; /* Centers content vertically within the element */
   justify-content: center; /* Centers content horizontally within the element */
-  height: 700px; /* Set a minimum height of the viewport height */
-  width: 600px; /* Set a minimum width of the viewport width */
+  height: 650px; /* Set a minimum height of the viewport height */
+  width: 550px; /* Set a minimum width of the viewport width */
   border-radius: 10%; /* Adds rounded corners with a 10% border radius */
   right: 25px;
-  top: 100px;
+  top: 70px;
 }
 
 .back-night {
@@ -184,18 +184,18 @@
   display: flex; /* Enable flex properties for centering */
   align-items: center; /* Centers content vertically within the element */
   justify-content: center; /* Centers content horizontally within the element */
-  height: 700px; /* Set a minimum height of the viewport height */
-  width: 600px; /* Set a minimum width of the viewport width */
+  height: 650px; /* Set a minimum height of the viewport height */
+  width: 550px; /* Set a minimum width of the viewport width */
   border-radius: 10%; /* Adds rounded corners with a 10% border radius */
   right: 25px;
-  top: 100px;
+  top: 70px;
 }
 
 .front {
   position: absolute;
   background-color: #a4d0a4;
-  width: 600px;
-  height: 700px;
+  width: 550px;
+  height: 650px;
   left: 50px;
   bottom: 50px;
   border-radius: 10%;
@@ -205,8 +205,8 @@
 .front-night {
   position: absolute;
   background-color: #c9d3f5;
-  width: 600px;
-  height: 700px;
+  width: 550px;
+  height: 650px;
   left: 50px;
   bottom: 50px;
   border-radius: 10%;
@@ -218,10 +218,10 @@
   background-color: #d9d9d9;
   align-items: center;
   justify-content: center;
-  width: 400px;
-  height: 100px;
+  width: 350px;
+  height: 80px;
   left: 100px;
-  bottom: 625px;
+  bottom: 585px;
   border-radius: 20px;
 }
 
@@ -230,15 +230,15 @@
   background-color: #d9d9d9;
   align-items: center;
   justify-content: center;
-  width: 400px;
-  height: 100px;
+  width: 350px;
+  height: 80px;
   left: 100px;
-  bottom: 625px;
+  bottom: 585px;
   border-radius: 20px;
 }
 
 .text {
-  font-size: 45px;
+  font-size: 42px;
   text-align: center; /* Horizontally centers the text within the h1 element */
   line-height: 2; /* Vertically centers the text within the h1 element */
   font-family: "Kanit", sans-serif;
@@ -246,7 +246,7 @@
 }
 
 .text-night {
-  font-size: 45px;
+  font-size: 42px;
   text-align: center; /* Horizontally centers the text within the h1 element */
   line-height: 2; /* Vertically centers the text within the h1 element */
   font-family: "Kanit", sans-serif;
@@ -255,7 +255,7 @@
 
 .grid {
   position: relative;
-  max-height: 450px; /* Adjust the height as needed */
+  max-height: 400px; /* Adjust the height as needed */
   overflow-y: auto; /* Enable vertical scrolling when content overflows */
   border: 1px solid #ccc; /* Optional: Add a border to visualize the container */
   border-radius: 5px; /* Optional: Add rounded corners */
@@ -266,12 +266,12 @@
 
 .grid-night {
   position: relative;
-  max-height: 450px; /* Adjust the height as needed */
+  max-height: 400px; /* Adjust the height as needed */
   overflow-y: auto; /* Enable vertical scrolling when content overflows */
   border: 1px solid #ccc; /* Optional: Add a border to visualize the container */
   border-radius: 5px; /* Optional: Add rounded corners */
   padding: 5px; /* Optional: Add padding for spacing */
-  background-color: #FFD2D7;
+  background-color: #ffd2d7;
   margin-top: 5px;
 }
 
@@ -291,14 +291,6 @@
   position: absolute;
 }
 
-.star-number-night {
-  position: absolute;
-  padding-left: 35px;
-  padding-top: 16px;
-  font-size: 25px;
-  color: #f7d060;
-}
-
 .trophies {
   display: block;
 }
@@ -312,17 +304,27 @@
 }
 
 .arrow-night {
-  display:block;
+  display: block;
 }
 
 .player-box {
   border: 2px solid beige;
   margin: 5px;
 }
+.player-box-night {
+  border: 2px solid #ffd2d7;
+  margin: 5px;
+}
 
 .player {
   color: #7d5d1e;
   background-color: #d0e7d2;
+  height: 100%;
+  font-family: "Kanit", sans-serif;
+}
+.player-night {
+  color: #7d5d1e;
+  background-color: #ffd2d7;
   height: 100%;
   font-family: "Kanit", sans-serif;
 }
@@ -341,8 +343,48 @@
   top: 10px;
   font-size: 30px;
   font-family: "Kanit", "sans-serif";
+  margin-top: 10px;
+}
+.diff-btn-night {
+  float: left;
+  top: 10px;
+  font-size: 30px;
+  font-family: "Kanit", "sans-serif";
+  margin-top: 10px;
 }
 
+.ez {
+  background-color: #fff8e1;
+  font-size: 15px;
+  font-weight: 800;
+}
+.ez-night {
+  background-color: #b9b4c7;
+  font-size: 15px;
+  font-weight: 800;
+}
+.md {
+  background-color: #f8ead8;
+  font-size: 15px;
+  font-weight: 800;
+}
+.md-night {
+  background-color: #5c5470;
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+}
+.hd {
+  background-color: #eddbc7;
+  font-size: 15px;
+  font-weight: 800;
+}
+.hd-night {
+  background-color: #352f44;
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+}
 /* End of Leaderboard */
 
 /* Start of Game & Board  */
@@ -374,13 +416,22 @@
   display: grid; /* Use CSS Grid */
   grid-template-rows: repeat(6, 1fr);
   grid-template-columns: repeat(6, 1fr);
-  width: 470px;
-  height: 470px;
+  width: 475px;
+  height: 475px;
   align-items: center;
   margin: auto;
   border: 10px solid darkgrey;
 }
-
+.grid-div-6-night {
+  display: grid; /* Use CSS Grid */
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  width: 475px;
+  height: 475px;
+  align-items: center;
+  margin: auto;
+  border: 10px solid #4477CE;
+}
 .block-6 {
   width: 75px;
   height: 75px;
@@ -392,7 +443,17 @@
   font-weight: bold;
   background-color: lightgray; /* Add a background color for each block */
 }
-
+.grid-div-6-night .block-6 {
+  width: 75px;
+  height: 75px;
+  border: 1px solid #4477CE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #C9D3F5; /* Add a background color for each block */
+}
 .grid-div-9 {
   display: grid; /* Use CSS Grid */
   grid-template-rows: repeat(9, 1fr);
@@ -403,7 +464,16 @@
   margin: auto;
   border: 10px solid darkgrey;
 }
-
+.grid-div-9-night {
+  display: grid; /* Use CSS Grid */
+  grid-template-rows: repeat(9, 1fr);
+  grid-template-columns: repeat(9, 1fr);
+  width: 605px;
+  height: 605px;
+  align-items: center;
+  margin: auto;
+  border: 10px solid #4477CE;
+}
 .block-9 {
   width: 65px;
   height: 65px;
@@ -415,7 +485,17 @@
   font-weight: bold;
   background-color: lightgray; /* Add a background color for each block */
 }
-
+.grid-div-9-night .block-9 {
+  width: 65px;
+  height: 65px;
+  border: 1px solid #4477CE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #C9D3F5; /* Add a background color for each block */
+}
 .grid-div-12 {
   display: grid; /* Use CSS Grid */
   grid-template-rows: repeat(12, 1fr);
@@ -425,6 +505,16 @@
   align-items: center;
   margin: auto;
   border: 10px solid darkgrey;
+}
+.grid-div-12-night {
+  display: grid; /* Use CSS Grid */
+  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+  width: 680px;
+  height: 680px;
+  align-items: center;
+  margin: auto;
+  border: 10px solid #4477CE;
 }
 .block-12 {
   width: 55px;
@@ -437,7 +527,17 @@
   font-weight: bold;
   background-color: lightgray; /* Add a background color for each block */
 }
-
+.grid-div-12-night .block-12 {
+  width: 55px;
+  height: 55px;
+  border: 1px solid #4477CE;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #C9D3F5;
+}
 .scoreboard {
   display: flex;
   justify-content: space-between;
@@ -461,8 +561,20 @@
   padding: 20px;
   background-color: #faf0e6;
 }
+.avatar-selection-page-night {
+  text-align: center;
+  padding: 20px;
+  background-color: #c9d3f5;
+}
 
 .text h1 {
+  font-weight: bold; /* Set the text within h1 to be bold */
+  font-family: "Kanit", sans-serif; /* Use the Kanit font */
+  font-size: 52px; /* Set the desired font size in pixels */
+  margin-bottom: 40px;
+}
+
+.text-night h1 {
   font-weight: bold; /* Set the text within h1 to be bold */
   font-family: "Kanit", sans-serif; /* Use the Kanit font */
   font-size: 52px; /* Set the desired font size in pixels */
@@ -474,10 +586,26 @@
   grid-template-columns: repeat(4, 1fr); /* 4 columns, adjust as needed */
   grid-gap: 40px; /* Adjust the gap between avatars */
 }
+.avatar-grid-night {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns, adjust as needed */
+  grid-gap: 40px; /* Adjust the gap between avatars */
+}
 
 /* Style the AvatarSelection component */
 .image {
   background-color: #fccbbf;
+  border: 4px solid black; /* Border style and color */
+  border-radius: 10px;
+  padding: 10px; /* Add some spacing around avatars */
+  padding-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-grid-night .image {
+  background-color: #5c469c;
   border: 4px solid black; /* Border style and color */
   border-radius: 10px;
   padding: 10px; /* Add some spacing around avatars */
@@ -512,6 +640,11 @@
 /* Center the main menu button */
 #mainmenu-btn {
   margin-top: 20px;
+  background-color: #8c8c8c;
+}
+#mainmenu-btn-night {
+  margin-top: 20px;
+  background-color: #0c134f;
 }
 
 .avatarpg-btn {
@@ -521,8 +654,11 @@
   align-items: center;
 }
 
-.btn-confirm {
-  background-color: #8c8c8c;
+.avatarpg-btn-night {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 /* End of Avatar */
@@ -541,7 +677,18 @@
   width: 100%;
   padding-bottom: 500px;
 }
-
+.copy-night {
+  display: flex;
+  font-family: "Kanit", sans-serif;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  text-align: center; /* Center text within the container */
+  background-color: #BFBAE1;
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 500px;
+}
 .copy-message {
   font-weight: 400;
   margin-bottom: 10px;
@@ -591,6 +738,13 @@
   font-size: 20px;
   color: black;
 }
+#back-btn {
+  background-color: #d9d9d9;
+  display: flex;
+  align-items: center; /* Vertically align content */
+  font-size: 20px;
+  color: black;
+}
 
 .backarrow svg {
   margin-right: 10px;
@@ -612,17 +766,35 @@
   font-family: "Kanit", sans-serif;
   display: flex;
 }
+.input-container-night {
+  font-family: "Kanit", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
 .seldiff h1 {
   font-family: "Kanit", sans-serif;
   font-weight: 800;
   margin-bottom: 20px;
   text-shadow: 2px 2px 8px gray;
 }
+.seldiff-night h1 {
+  font-family: "Kanit", sans-serif;
+  font-weight: 800;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 8px gray;
+}
 .name-box {
-  border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-  background-color: #f0f0f0;
+  background-color: #fff6e9;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+.name-box-night {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #bfbae1;
   width: 100%;
   margin-bottom: 10px;
   font-size: 30px;
@@ -642,6 +814,21 @@
   text-align: center;
   font-size: 16px;
 }
+.difficulty-buttons-night {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 350px; /* Set a fixed width and height for a square container */
+  height: 300px;
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: #faf0e6;
+  text-align: center;
+  font-size: 16px;
+}
 .easy,
 .med,
 .hard {
@@ -653,10 +840,24 @@
   height: 70px;
   margin: 10px;
 }
-
+.easy-night,
+.med-night,
+.hard-night {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  width: 300px;
+  height: 70px;
+  margin: 10px;
+}
 .easy {
   background-color: #edd7b3;
   color: #bb1f1f;
+}
+.easy-night {
+  background-color: #b9b4c7;
+  color: black;
 }
 
 .easy .btn {
@@ -669,13 +870,36 @@
   font-weight: 800;
   font-size: 32px;
 }
-
+.easy-night .btn {
+  color: black;
+  width: 300px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 32px;
+}
 .med {
   background-color: #c08261;
   color: black;
 }
 .med .btn {
   color: black;
+  width: 300px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 32px;
+}
+.med-night {
+  background-color: #5c5470;
+  color: #faf0e6;
+}
+.med-night .btn {
+  color: #faf0e6;
   width: 300px;
   height: 70px;
   display: flex;
@@ -698,6 +922,20 @@
   font-weight: 800;
   font-size: 32px;
 }
+.hard-night {
+  background-color: #352f44;
+  color: #fff8d6;
+}
+.hard-night .btn {
+  color: #fff8d6;
+  width: 300px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 32px;
+}
 
 /* YourComponent.css */
 
@@ -707,15 +945,26 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-color: #faf0e6;
+  background-color: #fff6e9;
   padding-bottom: 500px;
 }
-
+.input-container-night {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #BFBAE1;
+  padding-bottom: 500px;
+}
 .namebox,
 .roombox {
   margin: 10px;
 }
-
+.namebox-night,
+.roombox-night {
+  margin: 10px;
+}
 .namebox input,
 .roombox input {
   width: 200px;
@@ -725,8 +974,22 @@
   outline: none;
   font-size: 16px;
 }
-
+.namebox-night input,
+.roombox-night input {
+  width: 200px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  font-size: 16px;
+}
 .nav-container {
+  display: flex;
+  flex-direction: column; /* Change flex-direction to column */
+  align-items: center; /* Align items in the center */
+  margin-top: 20px;
+}
+.nav-container-night {
   display: flex;
   flex-direction: column; /* Change flex-direction to column */
   align-items: center; /* Align items in the center */
@@ -740,10 +1003,24 @@
   height: 50px;
   margin-bottom: 10px;
 }
-
+.backbtn-night {
+  background-color: #0C134F;
+  color: white;
+  border-radius: 5px;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 10px;
+}
 .backbtn .btn {
   background-color: #d9d9d9;
   color: black;
+  width: 300px;
+  font-weight: bold;
+  font-size: 25px;
+}
+.backbtn-night .btn {
+  background-color: #0C134F;
+  color: white;
   width: 300px;
   font-weight: bold;
   font-size: 25px;
@@ -763,6 +1040,20 @@
   font-weight: bold;
   font-size: 25px;
 }
+.joinbtn-night {
+  background-color: #5C469C;
+  color: white;
+  border-radius: 5px;
+  width: 300px;
+  height: 50px;
+}
+.joinbtn-night .btn {
+  background-color: #5C469C;
+  color: white;
+  width: 300px;
+  font-weight: bold;
+  font-size: 25px;
+}
 
 .title {
   font-size: 36px; /* Adjust the font size as needed */
@@ -772,7 +1063,14 @@
   font-weight: 800;
   text-shadow: 1px 1px 1px gray;
 }
-
+.title-night {
+  font-size: 36px; /* Adjust the font size as needed */
+  text-align: center; /* Center align the title */
+  margin-bottom: 20px; /* Add spacing below the title */
+  color: #ffd469;
+  font-weight: 800;
+  text-shadow: 1px 1px 1px gray;
+}
 /* End of InputForm */
 
 /* Start of Choice Start New Join Game */
@@ -784,21 +1082,38 @@
   justify-content: center;
   font-family: "Kanit", "san-serif";
 }
-
+.choice-container-night {
+  display: flex;
+  background-color: #bfbae1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: "Kanit", "san-serif";
+}
 .choice-container .startnew {
   margin-right: 10px; /* Add space to the right of the "Start New" button */
 }
-
+.choice-container-night .startnew-night {
+  margin-right: 10px; /* Add space to the right of the "Start New" button */
+}
 .choice-container .joingame {
   margin-left: 10px; /* Add space to the left of the "Join Game" button */
 }
+.choice-container-night .joingame-night {
+  margin-left: 10px; /* Add space to the left of the "Join Game" button */
+}
 .startnew .btn {
-  background-color: white;
+  background-color: white(203, 66, 66);
   color: #8c8c8c;
   width: 250px;
   font-size: 20px;
 }
-
+.startnew-night .btn {
+  background-color: white(203, 66, 66);
+  color: #8c8c8c;
+  width: 250px;
+  font-size: 20px;
+}
 .startnew {
   background-color: white;
   color: #8c8c8c;
@@ -807,8 +1122,23 @@
   width: 250px;
   height: 50px;
 }
-
+.startnew-night {
+  background-color: white;
+  color: #8c8c8c;
+  border: 2px solid whitesmoke;
+  border-radius: 10px;
+  width: 250px;
+  height: 50px;
+}
 .joingame {
+  background-color: white;
+  color: #8c8c8c;
+  border: 2px solid whitesmoke;
+  border-radius: 10px;
+  width: 250px;
+  height: 50px;
+}
+.joingame-night {
   background-color: white;
   color: #8c8c8c;
   border: 2px solid whitesmoke;
@@ -822,7 +1152,12 @@
   width: 250px;
   font-size: 20px;
 }
-
+.joingame-night .btn {
+  background-color: white;
+  color: #8c8c8c;
+  width: 250px;
+  font-size: 20px;
+}
 /* End of Choice Start New Join Game */
 
 /* Start of MainMenu */
@@ -835,16 +1170,39 @@
   padding: 10px; /* Add padding to create spacing around the content */
   font-family: "Kanit", "san-serif";
 }
-
+.mainmenu-container-night {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #bfbae1;
+  padding: 10px; /* Add padding to create spacing around the content */
+  font-family: "Kanit", "san-serif";
+}
 .maintitle h1 {
   margin-bottom: 5px; /* Add margin at the bottom of the title */
   color: #d4492a;
   font-weight: 700;
   text-shadow: 1px 1px 1px gray;
 }
+.maintitle-night h1 {
+  margin-bottom: 5px; /* Add margin at the bottom of the title */
+  color: #ffd469;
+  font-weight: 700;
+  text-shadow: 1px 1px 1px gray;
+}
 
 #leaderboard-btn,
 #avatar-btn {
+  margin: 10px 0; /* Add margin above and below the buttons */
+  width: 420px; /* Adjust the width of the buttons if needed */
+  height: 70px;
+  border-radius: 10px;
+  font-size: 35px;
+  font-weight: bold;
+}
+#leaderboard-btn-night,
+#avatar-btn-night {
   margin: 10px 0; /* Add margin above and below the buttons */
   width: 420px; /* Adjust the width of the buttons if needed */
   height: 70px;
@@ -859,6 +1217,13 @@
 #leaderboard-btn {
   background-color: #186f65;
 }
+#avatar-btn-night {
+  background-color: #d4adfc;
+  color: black;
+}
+#leaderboard-btn-night {
+  background-color: #5c469c;
+}
 body,
 html {
   margin: 0;
@@ -872,8 +1237,20 @@ html {
   text-align: center;
   margin: 10px; /* Add margin for spacing */
 }
+.theme-container-night {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 10px; /* Add margin for spacing */
+}
 .theme h2 {
   color: #8c8c8c;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+.theme-night h2 {
+  color: white;
   font-size: 20px;
   margin-bottom: 5px;
 }
@@ -893,7 +1270,22 @@ html {
   font-size: 20px;
   font-weight: bold;
 }
-
+#day-btn-night,
+#night-btn-night {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: none;
+  width: 100px;
+  height: 40px; /* Increased height for better alignment */
+  background-color: #ffd9c0;
+  margin-top: 10px; /* Add space between each pair */
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
 #day-btn {
   margin-top: 5px;
 }
@@ -901,7 +1293,13 @@ html {
   display: flex;
   justify-content: center; /* Center horizontally */
 }
-
+#day-btn-night {
+  margin-top: 5px;
+}
+.daynight-night {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+}
 /* start of game page */
 
 #default-background-color-font {
@@ -912,21 +1310,30 @@ html {
 }
 
 #default-background-color-font-night {
-  background-color: blueviolet;
+  background-color: #bfbae1;
+  min-height: 100vh;
+  min-width: 100vw;
   font-family: "Kanit", sans-serif;
 }
 
 .in-line-grid {
   display: flex;
 }
-
+.in-line-grid-night {
+  display: flex;
+}
 .findmymines-text {
   font-family: "Kanit", sans-serif;
   font-size: 70px;
   color: #d4492a;
   font-weight: bold;
 }
-
+.findmymines-text-night {
+  font-family: "Kanit", sans-serif;
+  font-size: 70px;
+  color: #FFD469;
+  font-weight: bold;
+}
 /* result modal css */
 .modal {
   position: absolute;
@@ -934,7 +1341,6 @@ html {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 70%;
-
   background-color: white;
   padding: 6rem;
   border-radius: 50px; /* Use a large value for a rounded effect */
@@ -952,15 +1358,35 @@ html {
   backdrop-filter: blur(3px);
   z-index: 5;
 }
-
+.overlay-night {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 5;
+}
 #you-win {
   font-size: 50px;
   color: #3b9830;
   font-family: "Kanit", sans-serif;
   font-weight: bold;
 }
-
+#you-win-night {
+  font-size: 50px;
+  color: #3b9830;
+  font-family: "Kanit", sans-serif;
+  font-weight: bold;
+}
 #you-lose {
+  font-size: 50px;
+  color: #bb1f1f;
+  font-family: "Kanit", sans-serif;
+  font-weight: bold;
+}
+#you-lose-night {
   font-size: 50px;
   color: #bb1f1f;
   font-family: "Kanit", sans-serif;
@@ -973,12 +1399,34 @@ html {
   font-family: "Kanit", sans-serif;
   font-weight: bold;
 }
-
+.result-modal-text-night {
+  font-size: 50px;
+  color: #d4492a;
+  font-family: "Kanit", sans-serif;
+  font-weight: bold;
+}
 .restart-btn {
+  font-size: 25px;
+  border-radius: 4px;
+  background-color: #ffd9c0;
+  color: black;
+  border: 1px solid black; /* Green */
+  padding: 2px 5px;
+  margin-bottom: 15px;
+}
+.restart-btn-night {
   font-size: 30px;
   border-radius: 4px;
   background-color: #ffd9c0;
   color: black;
-  border: 2px solid #ffd9c0; /* Green */
+  border: 1px solid black; /* Green */
   padding: 2px 5px;
+  margin-bottom: 15px;
+}
+
+.bombscore {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

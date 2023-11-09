@@ -71,7 +71,7 @@ const getRoomPlayersNum = (room) => {
 exports.initializeSocket = (io) => {
   io.on("connection", (socket) => {
     online++;
-    io.emit("onlineClients", online);
+    io.emit("onlineClients", Math.ceil(online/3));
 
     socket.on("newGame", ({ difficulty }) => {
       let room = makeRoom(difficulty);

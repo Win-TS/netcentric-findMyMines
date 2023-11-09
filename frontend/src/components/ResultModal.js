@@ -13,42 +13,50 @@ const ResultModal = ({ score, opponentScore, end, restart, nightTheme }) => {
     padding: "20px",
     zIndex: 1000,
     textAlign: "center",
-    borderRadius: "5px",
+    borderRadius: "10px",
   };
 
   if (end) {
     return (
       <div>
-        <div class={`overlay${nightTheme ? '-night' : ''}`}></div>
+        <div class={`overlay${nightTheme ? "-night" : ""}`}></div>
         <div style={modalStyle}>
           {score > opponentScore ? (
             <>
               <img src={bombImg} width="150px" height="150px" alt="bomb" />
-              <h1 class={`result-modal-text${nightTheme ? '-night' : ''}`}>FINDMYMINES</h1>
-              <h1 id={`you-win${nightTheme ? '-night' : ''}`}>You Win!!!</h1>
+              <h1 class={`result-modal-text${nightTheme ? "-night" : ""}`}>
+                FINDMYMINES
+              </h1>
+              <h1 id={`you-win${nightTheme ? "-night" : ""}`}>You Win!!!</h1>
               <br />
-              <button class={`restart-btn${nightTheme ? '-night' : ''}`} onClick={restart}>
-                Restart
+              <button
+                class={`restart-btn${nightTheme ? "-night" : ""}`}
+                onClick={restart}
+              >
+                RESTART
               </button>
               <br />
               <Link to="/">
                 <img src={homeImg} width="50px" height="50px" alt="home" />
-                <p>Go to home page</p>
               </Link>
             </>
           ) : (
             <>
               <img src={bombImg} width="150px" height="150px" alt="bomb" />
-              <h1 class={`result-modal-text${nightTheme ? '-night' : ''}`}>FINDMYMINES</h1>
-              <h1 id={`you-lose${nightTheme ? '-night' : ''}`}>You Lose!!!</h1>
+              <h1 class={`result-modal-text${nightTheme ? "-night" : ""}`}>
+                FINDMYMINES
+              </h1>
+              <h1 id={`you-lose${nightTheme ? "-night" : ""}`}>You Lose!!!</h1>
               <br />
-              <button class={`restart-btn${nightTheme ? '-night' : ''}`} onClick={restart}>
-                Restart
+              <button
+                class={`restart-btn${nightTheme ? "-night" : ""}`}
+                onClick={restart}
+              >
+                RESTART
               </button>
               <br />
               <Link to="/">
                 <img src={homeImg} width="50px" height="50px" alt="home" />
-                <p>Go to home page</p>
               </Link>
             </>
           )}
