@@ -2,9 +2,9 @@ import bombImg from "../assets/bomb.svg";
 import goldenBombImg from "../assets/goldenBomb.png";
 import { Link } from "react-router-dom";
 
-const HowToPlay = ({nightTheme}) => {
+const HowToPlay = ({ nightTheme }) => {
   return (
-    <div className="how-to-play-container">
+    <div>
       <Link to="/">
         <button className={`exit${nightTheme ? "-night" : ""}`}>
           <svg
@@ -20,42 +20,44 @@ const HowToPlay = ({nightTheme}) => {
           </svg>
         </button>
       </Link>
-      <h1 className="how-to-play">How to Play</h1>
-      <p className="instructions-text">
-        Here are the instructions on how to play the game:
-      </p>
-      <ol>
-        <li>In this game, you will compete to find mines with your peer.</li>
-        <li>First, choose the difficulty.</li>
-        <li>Enter a game room or create a new one.</li>
-        <li>
-          Once in the game, a player will be randomly chosen,
-          <br /> and you will each have 10 seconds per round.
-        </li>
-        <ul>
-          <li>If you reveal a mine, you receive 1 point!</li>
-          <li>If you reveal a golden mine, you receive 3 points!</li>
-          <div className="mine-images">
-            <img src={bombImg} alt="Bomb" className="bomb-image" />
-            <img
-              src={goldenBombImg}
-              alt="Golden Bomb"
-              className="golden-bomb-image"
-            />
-          </div>
+      <div className={`how-to-play-container${nightTheme ? "-night" : ""}`}>
+        <h1 className={`how-to-play${nightTheme ? "-night" : ""}`}>How to Play</h1>
+        <p className="instructions-text">
+          Here are the instructions on how to play the game:
+        </p>
+        <ol>
+          <li>In this game, you will compete to find mines with your peer.</li>
+          <li>First, choose the difficulty.</li>
+          <li>Enter a game room or create a new one.</li>
           <li>
-            Extra! If you find 3 streak mines, 1 bonus point will be given!
+            Once in the game, a player will be randomly chosen,
+            <br /> and you will each have 10 seconds per round.
           </li>
-          <li>
-            At the end, the player with the highest points will be the winner.
-          </li>
-          <li>
-            Restart button will be available, but the winner will start first!
-          </li>
-        </ul>
-      </ol>
-      <p>Hint: Try to use strategic moves to win this game!</p>
-      <p className="good-luck-text">Enjoy the game and good luck!</p>
+          <ul>
+            <li>If you reveal a mine, you receive 1 point!</li>
+            <li>If you reveal a golden mine, you receive 3 points!</li>
+            <div className="mine-images">
+              <img src={bombImg} alt="Bomb" className="bomb-image" />
+              <img
+                src={goldenBombImg}
+                alt="Golden Bomb"
+                className="golden-bomb-image"
+              />
+            </div>
+            <li>
+              Extra! If you find 3 streak mines, 1 bonus point will be given!
+            </li>
+            <li>
+              At the end, the player with the highest points will be the winner.
+            </li>
+            <li>
+              Restart button will be available, but the winner will start first!
+            </li>
+          </ul>
+        </ol>
+        <p>Hint: Try to use strategic moves to win this game!</p>
+        <p className={`good-luck-text${nightTheme ? "-night" : ""}`}>Enjoy the game and good luck!</p>
+      </div>
     </div>
   );
 };
