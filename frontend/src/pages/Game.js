@@ -72,7 +72,7 @@ const Game = ({ nightTheme }) => {
     setOpponentPlayer(currentOpponentPlayer);
     setEnd(true);
     await axios.post(
-      `${ENDPOINT}/score/new-score?name=${playerName}&score=${currentPlayerScore}&difficulty=${difficulty}`
+      `${ENDPOINT}/score/new-score?name=${playerName}&score=${scoreArray[playerIndex]}&difficulty=${difficulty}`
     );
   };
 
