@@ -5,7 +5,7 @@ import Game from "./pages/Game";
 import Leaderboard from "./pages/Leaderboard";
 import Avatar from "./pages/Avatar";
 import Admin from "./pages/Admin";
-import backgroundMusic from "./assets/bgm.m4a";
+import backgroundMusic from "./assets/bgm.mp3";
 import volumeOn from "./assets/volume-up.svg";
 import volumeOff from "./assets/volume-off.svg";
 import { useState } from "react";
